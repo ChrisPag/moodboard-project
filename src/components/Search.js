@@ -1,7 +1,9 @@
 import '../css/Home.css';
 import useFetch from './useFetch';
+import { useState, useEffect } from 'react';
 
 function Search() {
+    const [userInput, setUserInput] = useState('');
     const searchQuery = "candy";
 
     const url = "https://api.unsplash.com/search/photos/?page=1&query=" +
@@ -11,16 +13,19 @@ function Search() {
 
     const {data: imageData, isLoaded} = useFetch(url);
 
-    const handleSubmit = () => {
-        console.log("sup");
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(userInput);
     }
-
-    console.log(imageData);
 
     return (
         <div className="Search">
             <form onSubmit = {handleSubmit}>
-                <input type ="text"placeholder="Search..."></input>
+                <input type ="text"
+                placeholder="Search..."
+                value = { userInput }
+                onChange={(e) => setUserInput(e.target.value)}
+                ></input>
                 <button type="submit">Go</button>
             </form>
 
