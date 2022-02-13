@@ -1,32 +1,21 @@
 import '../css/Home.css';
-import { useState, useEffect } from 'react';
+import useFetch from './useFetch';
 
 function Search() {
-    const [data, setData] = useState(null);
-    const url = "https://api.unsplash.com/photos/random/?client_id=" 
-    + process.env.REACT_APP_ACCESS_KEY;
+    const searchQuery = "candy";
 
-    useEffect(() => {
-        console.log(url);
-        fetch(url)
-        .then(response => {
-            if(!response.ok){
-            throw Error('Could not fetch the data');
-            }
-            return response.json()
-          })
-    
-          .then(data =>{
-            setData(data);
-        })
+    const url = "https://api.unsplash.com/search/photos/?page=1&query=" +
+    searchQuery +
+    "&client_id=" + 
+    process.env.REACT_APP_ACCESS_KEY;
 
-        
-    }, [url]);
+    const {data: imageData, isLoaded} = useFetch(url);
 
-    console.log(data);
     const handleSubmit = () => {
         console.log("sup");
     }
+
+    console.log(imageData);
 
     return (
         <div className="Search">
@@ -35,7 +24,12 @@ function Search() {
                 <button type="submit">Go</button>
             </form>
 
-            {data && <img src={data.urls.small}></img>}
+            {imageData && isLoaded &&
+            (imageData.map((image, i)=>(
+                <div className="images" key={i}>
+                    <img src={image.urls.small}></img>
+                </div>
+            )))}
         </div>
     );
 }
