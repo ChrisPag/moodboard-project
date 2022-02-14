@@ -11,6 +11,7 @@ const useFetch = (url) => {
             if(!response.ok){
             throw Error('Could not fetch the data');
             }
+            setIsLoaded(false);
             return response.json()
         })
     
@@ -24,7 +25,7 @@ const useFetch = (url) => {
         })
     }, [url]);
 
-    return {data, isLoaded};
+    return {data, isLoaded, errorMessage};
   }
   
 export default useFetch;

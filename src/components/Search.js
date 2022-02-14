@@ -1,7 +1,7 @@
-import '../css/Home.css';
+import '../css/Content.css';
 
-import Home from './Home.js'
-import { useState, useEffect } from 'react';
+import Content from './Content.js'
+import { useState } from 'react';
 
 const Search = () => {
     const [userInput, setUserInput] = useState("");
@@ -10,7 +10,6 @@ const Search = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setQuery(userInput);
-        console.log(userInput);
     }
 
     return (
@@ -24,7 +23,7 @@ const Search = () => {
                 <button type="submit">Go</button>
             </form>
 
-            <Home query = {query} />
+            <Content query = {query} />
         </div>
     );
 }
