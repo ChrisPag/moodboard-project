@@ -1,14 +1,27 @@
-
+/*Home.css includes Home.js, Content.js, and Search.js*/
 .Home{
     margin-top:50px;
 }
 
-.Search {
+.Search form {
     float:left;
     margin-left:50px;
 }
 
-.Home{
-    margin-top:50px;
+#removeResults{
+    float:right;
+    margin-right:50px;
+}
+
+.Content{
+    padding-top:20px;
+}
+
+.images{
+    margin-top:20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
 

@@ -1,5 +1,4 @@
 import '../css/Home.css';
-import '../css/Content.css';
 import useFetch from './useFetch';
 
 const Home = ({query}) =>{
@@ -9,6 +8,8 @@ const Home = ({query}) =>{
     query +
     "&client_id=" + 
     process.env.REACT_APP_ACCESS_KEY);
+
+    console.log(imageData);
 
   return (
     <div className="Content">
