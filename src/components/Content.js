@@ -1,4 +1,5 @@
 import '../css/Home.css';
+import '../css/Content.css';
 import useFetch from './useFetch';
 
 const Home = ({query}) =>{

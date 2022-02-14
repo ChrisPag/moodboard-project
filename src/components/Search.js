@@ -1,4 +1,5 @@
 import '../css/Home.css';
+import '../css/Content.css';
 
 import Content from './Content.js'
 import { useState } from 'react';
