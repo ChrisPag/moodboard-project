@@ -1,20 +1,15 @@
 import '../css/Home.css';
-import useFetch from './useFetch';
+
+import Home from './Home.js'
 import { useState, useEffect } from 'react';
 
-function Search() {
-    const [userInput, setUserInput] = useState('');
-    const searchQuery = "candy";
-
-    const url = "https://api.unsplash.com/search/photos/?page=1&query=" +
-    searchQuery +
-    "&client_id=" + 
-    process.env.REACT_APP_ACCESS_KEY;
-
-    const {data: imageData, isLoaded} = useFetch(url);
+const Search = () => {
+    const [userInput, setUserInput] = useState("");
+    const [query, setQuery] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setQuery(userInput);
         console.log(userInput);
     }
 
@@ -29,12 +24,7 @@ function Search() {
                 <button type="submit">Go</button>
             </form>
 
-            {imageData && isLoaded &&
-            (imageData.map((image, i)=>(
-                <div className="images" key={i}>
-                    <img src={image.urls.small}></img>
-                </div>
-            )))}
+            <Home query = {query} />
         </div>
     );
 }
