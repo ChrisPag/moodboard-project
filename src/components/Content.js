@@ -1,5 +1,6 @@
 import '../css/Home.css';
 import useFetch from './useFetch';
+import { useState, useEffect } from 'react';
 
 const Home = ({query}) =>{
 
@@ -9,7 +10,26 @@ const Home = ({query}) =>{
     "&client_id=" + 
     process.env.REACT_APP_ACCESS_KEY);
 
-    console.log(imageData);
+  const likedArray = new Array(imageData.length).fill('Like');
+  console.log(likedArray);
+  const [liked, setLiked] = useState([]);
+  useEffect(()=>{
+    setLiked(likedArray);
+  },[imageData.length, imageData])
+  
+  //Update like state onClick
+  const handleClick = (index) =>{
+    let newArray = [...liked];
+  
+    if(newArray[index]==='Like'){
+      newArray[index] = 'Unlike';
+    }
+    else{
+      newArray[index] = 'Like';
+    }
+    setLiked(newArray);
+  }
+
 
   return (
     <div className="Content">
@@ -17,6 +37,8 @@ const Home = ({query}) =>{
           (imageData.map((image, i)=>(
             <div className="images" key={i}>
                 <img src={image.urls.small}></img>
+
+                <button onClick={()=>handleClick(i)}>{liked[i]}</button>
             </div>
         )))}
 

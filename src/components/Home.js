@@ -7,7 +7,7 @@ function Home() {
   return (
     <div className="Home">
       <button id="create">
-        <NavLink to="/moodboard" activeClassName="active">Create Moodboard
+        <NavLink to="/moodboard">Create Moodboard
         </NavLink>
       </button>
 
