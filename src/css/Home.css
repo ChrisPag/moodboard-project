@@ -13,6 +13,10 @@
     margin-right:50px;
 }
 
+#create{
+    float:right;
+}
+
 .Content{
     padding-top:20px;
 }

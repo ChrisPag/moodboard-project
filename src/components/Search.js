@@ -31,7 +31,7 @@ const Search = () => {
             </form>
 
             {showButton &&
-                <button id="removeResults" onClick = {removeResults}>Remove results</button>}
+                <button id="removeResults" onClick = {removeResults}>Clear</button>}
 
             <Content query = {query} />
         </div>
