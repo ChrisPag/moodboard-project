@@ -1,7 +1,7 @@
 import '../css/Home.css';
 
 import Content from './Content.js'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const Search = () => {
     let [page, setPage] = useState(1);
@@ -21,7 +21,7 @@ const Search = () => {
     }
     const showMore = () =>{
         setPage(++page);
-      }
+    }
 
     return (
         <div className="Search">
@@ -39,7 +39,7 @@ const Search = () => {
 
             <Content query = {query} page = {page} />
 
-            <button onClick = {showMore}>Show More</button>
+            {query && <button onClick = {showMore}>Next Page</button>}
         </div>
     );
 }

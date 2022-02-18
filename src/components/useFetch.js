@@ -9,11 +9,6 @@ const useFetch = (url) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [errorMessage, setErrorMessage] = useState();
     const [numPosts, setNumPosts] = useState(0);
-    /*const url = 
-    `https://api.unsplash.com/search/photos/?page=${page}
-    &query=${query}
-    &client_id=${
-    process.env.REACT_APP_ACCESS_KEY}`*/
 
     useEffect(() => {
         fetch(url)
@@ -29,7 +24,6 @@ const useFetch = (url) => {
             setData(data);
             setIsLoaded(true);
             setNumPosts(data.results.length);
-            console.log(data);
         })
 
         .catch(error => {
