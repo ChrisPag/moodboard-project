@@ -1,9 +1,10 @@
 import '../css/Home.css';
 
 import Content from './Content.js'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Search = () => {
+    let [page, setPage] = useState(1);
     const [userInput, setUserInput] = useState("");
     const [query, setQuery] = useState("");
     const [showButton, setShowButton] = useState(false);
@@ -18,6 +19,9 @@ const Search = () => {
         setQuery("");
         setShowButton(false);
     }
+    const showMore = () =>{
+        setPage(++page);
+      }
 
     return (
         <div className="Search">
@@ -33,7 +37,9 @@ const Search = () => {
             {showButton &&
                 <button id="removeResults" onClick = {removeResults}>Clear</button>}
 
-            <Content query = {query} />
+            <Content query = {query} page = {page} />
+
+            <button onClick = {showMore}>Show More</button>
         </div>
     );
 }

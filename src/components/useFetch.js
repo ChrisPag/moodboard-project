@@ -1,9 +1,19 @@
+/*This hook fetches data from a given url and in addition to
+the data it returns an isLoaded state and an error message 
+if there is an error*/
+
 import { useState, useEffect } from 'react';
 
 const useFetch = (url) => {
     const [data, setData] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [errorMessage, setErrorMessage] = useState();
+    const [numPosts, setNumPosts] = useState(0);
+    /*const url = 
+    `https://api.unsplash.com/search/photos/?page=${page}
+    &query=${query}
+    &client_id=${
+    process.env.REACT_APP_ACCESS_KEY}`*/
 
     useEffect(() => {
         fetch(url)
@@ -16,9 +26,10 @@ const useFetch = (url) => {
         })
     
         .then(data =>{
-            console.log(data);
-            setData(data.results);
+            setData(data);
             setIsLoaded(true);
+            setNumPosts(data.results.length);
+            console.log(data);
         })
 
         .catch(error => {
@@ -26,7 +37,7 @@ const useFetch = (url) => {
         })
     }, [url]);
 
-    return {data, isLoaded, errorMessage};
+    return {data, isLoaded, errorMessage, numPosts};
   }
   
 export default useFetch;
