@@ -10,10 +10,10 @@ function Home() {
 
   return (
     <div className="Home">
-      <button id="create">
+      {/*<button id="create">
         <NavLink to="/moodboard">Create Moodboard
         </NavLink>
-      </button>
+  </button>*/}
 
       <Search />
     </div>

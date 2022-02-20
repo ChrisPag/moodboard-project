@@ -21,6 +21,10 @@
     padding-top:20px;
 }
 
+/*.grid{
+    display: grid;
+    grid-template-columns: 25% 25% 25%
+}*/
 .images{
     margin-top:20px;
     display: block;
