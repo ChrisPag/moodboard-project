@@ -5,17 +5,17 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import { useState } from 'react';
 
 function App() {
-  const [word, setWord] = useState();
-  console.log(word)
+  const [likes, setLikes] = useState();
+  console.log(likes)
   return (
     <Router>
     <div className="App">
       
       <Routes>
         <Route exact path="/" element=
-          {<Home changeWord={word =>setWord(word)} />}
+          {<Home changeWord={likes =>setLikes(likes)} />}
         />
-        <Route path="/moodboard" element ={<Moodboard />}/>
+        <Route path="/moodboard" element ={<Moodboard likes = {likes} />}/>
       </Routes>
     </div>
     </Router>
