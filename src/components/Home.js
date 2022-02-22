@@ -49,7 +49,7 @@ function Home(props) {
     if(query===""){
       setLikedImages([]);
     }
-  },[numPosts, imageData])
+  },[numPosts, imageData, query])
   
   useEffect(()=>{
       setLikedImages(likedImages);
@@ -72,7 +72,7 @@ function Home(props) {
 
   return (
     <div className="Home">
-      <button id="create" onClick = {()=> props.changeWord(likedImages)}>
+      <button id="create" onClick = {()=> props.updateLikes(likedImages)}>
         <Link to="/moodboard">Create Moodboard</Link>
       </button>
 
@@ -101,7 +101,7 @@ function Home(props) {
         {!isLoaded && !errorMessage && <p>Loading...</p>}
         {errorMessage && <p> {errorMessage}</p>}
 
-        {showButton && <button onClick = {showMore}>Next Page</button>}
+        {query && <button onClick = {showMore}>Next Page</button>}
       </div>
     </div>
   );

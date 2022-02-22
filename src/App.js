@@ -6,14 +6,13 @@ import { useState } from 'react';
 
 function App() {
   const [likes, setLikes] = useState();
-  console.log(likes)
+ 
   return (
     <Router>
     <div className="App">
-      
       <Routes>
         <Route exact path="/" element=
-          {<Home changeWord={likes =>setLikes(likes)} />}
+          {<Home updateLikes={likes =>setLikes(likes)} />}
         />
         <Route path="/moodboard" element ={<Moodboard likes = {likes} />}/>
       </Routes>
