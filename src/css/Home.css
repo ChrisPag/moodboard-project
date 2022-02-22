@@ -3,7 +3,7 @@
     margin-top:50px;
 }
 
-.Search form {
+form {
     float:left;
     margin-left:50px;
 }
@@ -17,14 +17,6 @@
     float:right;
 }
 
-.Content{
-    padding-top:20px;
-}
-
-/*.grid{
-    display: grid;
-    grid-template-columns: 25% 25% 25%
-}*/
 .images{
     margin-top:20px;
     display: block;
