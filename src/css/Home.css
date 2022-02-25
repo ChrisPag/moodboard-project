@@ -3,7 +3,7 @@
     margin-top:50px;
 }
 
-.Search form {
+form {
     float:left;
     margin-left:50px;
 }
@@ -15,10 +15,6 @@
 
 #create{
     float:right;
-}
-
-.Content{
-    padding-top:20px;
 }
 
 .images{
