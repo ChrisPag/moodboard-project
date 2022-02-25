@@ -5,6 +5,7 @@ import '../css/Home.css';
 import useFetch from './useFetch';
 import { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom';
+import Masonry from 'masonry-layout';
 
 function Home(props) {
   let [page, setPage] = useState(1);
@@ -13,6 +14,9 @@ function Home(props) {
   const [showButton, setShowButton] = useState(false);
   const [imageGroup, setImageGroup] = useState();
   const [likedImages, setLikedImages] = useState([]);
+
+  const grid = document.querySelector('.grid');
+  const masonry = new Masonry(grid);
 
   /* Fetch the data using the user's query */
   const url =
@@ -82,14 +86,16 @@ function Home(props) {
             placeholder="Search..."
             value = { userInput }
             onChange={(e) => setUserInput(e.target.value)}
+            className="searchInput"
             ></input>
-            <button type="submit">Go</button>
+            <button className="submit" type="submit">Go</button>
         </form>
       </div>
 
       {showButton && <button id="removeResults" onClick = {removeResults}>Clear</button>}
 
       <div className="Content">
+        <div className="grid">
         {imageData && isLoaded && 
           (imageGroup.map((image, i)=>(
           <div className="images" key={i}>
@@ -97,6 +103,7 @@ function Home(props) {
             <button onClick={()=>handleClick(i)}>{liked[i]}</button>
           </div>
         )))}
+        </div>
 
         {!isLoaded && !errorMessage && <p>Loading...</p>}
         {errorMessage && <p> {errorMessage}</p>}
