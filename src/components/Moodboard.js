@@ -7,15 +7,21 @@ function Moodboard(props) {
   const navigate = useNavigate();
   return (
     <div className="Moodboard">
-      <button onClick={()=> navigate(-1)}>Back</button>
-      {props && 
-        (props.likes.map((likes, i)=>(
-        <div className="moodboard-imgs" key={i}>
-          <Draggable>
-            <img src={likes}></img>
-          </Draggable>
-        </div>
-      )))}
+      <div className="moodHeader"> 
+        <button id="back" className="btn" onClick={()=> navigate(-1)}>Back</button>
+      </div>
+      <div className='main'>
+          <div className='sidebar'>
+              {props && 
+                (props.likes.map((likes, i)=>(
+                <div className="moodboard-imgs" key={i}>
+                  <Draggable>
+                    <img src={likes}></img>
+                  </Draggable>
+                </div>
+              )))}
+          </div>
+      </div>
     </div>
   );
   }
