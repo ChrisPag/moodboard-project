@@ -113,7 +113,7 @@ a {
     color: transparent;
 }
 
-#heart {
+.heart {
     width: 40px;
     cursor: pointer;
 }

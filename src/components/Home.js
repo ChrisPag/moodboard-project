@@ -8,7 +8,6 @@ import {Link} from 'react-router-dom';
 import Masonry from 'masonry-layout';
 import imagesLoaded from 'imagesloaded';
 
-
 function Home(props) {
   let [page, setPage] = useState(1);
   const [userInput, setUserInput] = useState("");
@@ -17,7 +16,14 @@ function Home(props) {
   const [imageGroup, setImageGroup] = useState();
   const [likedImages, setLikedImages] = useState([]);
 
+  /* *** IGNORE THIS but don't delete thx :) ***
+  const gridRef = useRef();
+  const [layoutImgs, setLayoutImgs] = useState(false);
+  const masonry = new Masonry(gridRef.current);
+  <div className="grid" ref={gridRef}> */
 
+  const red = 'red.png';
+  const white = 'white.png';
 
   /* Fetch the data using the user's query */
   const url =
@@ -34,26 +40,21 @@ function Home(props) {
     setShowButton(!showButton);
   }
 
-  const removeResults = () =>{
-    setQuery("");
-    setShowButton(false);
-  }
-
   const showMore = () =>{
     setPage(++page);
   }
 
-  /* Change like button text, add/remove liked images to array*/
-  const likedArray = new Array(numPosts).fill('Like');
+  /* This code change like button text, add/remove liked images to array
+  ** likedArray is the initial array with heart image src values
+  ** liked holds the heart image src values
+  ** likedImages holds the actual image src values
+  */
+  const likedArray = new Array(numPosts).fill(white);
   const [liked, setLiked] = useState([]);
 
   useEffect(()=>{
     setLiked(likedArray);
     setImageGroup(imageData.results);
-
-    if(query===""){
-      setLikedImages([]);
-    }
   },[numPosts, imageData, query])
   
   useEffect(()=>{
@@ -62,21 +63,18 @@ function Home(props) {
   }, [liked])
 
   const handleClick = (index) =>{
-    const ImageId = document.getElementById("heart");
     let newArray = [...liked];
 
-    if(newArray[index]==='Like'){
-      newArray[index] = 'Unlike';
-      ImageId.src = "red.png";
-      setLikedImages(oldArray => [...oldArray, imageGroup[index].urls.small]);
-    }
-    else{
-      newArray[index] = 'Like';
-      ImageId.src = "white.png";
+    if(newArray[index]===red){
+      newArray[index] = white;
       setLikedImages(likedImages.filter(likedImages => likedImages !== imageGroup[index].urls.small))
     }
+    else{
+      newArray[index] = red;
+      setLikedImages(theArray => [...theArray, imageGroup[index].urls.small]);
+    }
     setLiked(newArray);
-  }
+  }/* End of likedImage code */
 
   const grid = document.querySelector('.grid');
   const masonry = new Masonry(grid, {
@@ -87,7 +85,6 @@ function Home(props) {
     // layout Masonry after each image loads
     masonry.layout();
   });
- 
 
   return (
     <div className="Home">
@@ -107,10 +104,6 @@ function Home(props) {
         <button  id="create" className="btn" onClick = {()=> props.updateLikes(likedImages)}>
           <Link to="/moodboard">Create Moodboard</Link>
         </button>
-
-        
-
-        {showButton && <button id="removeResults" id="clear" className="btn" onClick = {removeResults}>Clear</button>}
       </div>
         
       <div className="Content">
@@ -119,7 +112,7 @@ function Home(props) {
            (imageGroup.map((image, i)=>(
           <div  key={i}>
               <img  className="images" src={image.urls.small} alt={image.alt_description} ></img>
-              <span><button className='likeButton' onClick={()=>handleClick(i)}> {liked[i]} <img Id="heart" src="white.png"></img> </button></span>
+              <span><button className='likeButton' onClick={()=>handleClick(i)}> <img className="heart" src={liked[i]}></img> </button></span>
           </div>
         )))}
         </div>
