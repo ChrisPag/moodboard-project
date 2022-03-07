@@ -11,6 +11,7 @@ const useFetch = (url) => {
     const [numPosts, setNumPosts] = useState(0);
 
     useEffect(() => {
+        setIsLoaded(false);
         fetch(url)
         .then(response => {
             if(!response.ok){

@@ -3,7 +3,7 @@ search results (content) and button to link
 to the moodboard creation page*/
 import '../css/Home.css';
 import useFetch from './useFetch';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {Link} from 'react-router-dom';
 import Masonry from 'masonry-layout';
 import imagesLoaded from 'imagesloaded';
@@ -16,14 +16,19 @@ function Home(props) {
   const [imageGroup, setImageGroup] = useState();
   const [likedImages, setLikedImages] = useState([]);
 
-  /* *** IGNORE THIS but don't delete thx :) ***
-  const gridRef = useRef();
-  const [layoutImgs, setLayoutImgs] = useState(false);
-  const masonry = new Masonry(gridRef.current);
-  <div className="grid" ref={gridRef}> */
-
   const red = 'red.png';
   const white = 'white.png';
+
+  /*Set up masonry when images load*/
+  const gridRef = useRef();
+  const masonry = new Masonry(gridRef.current, {
+    isFitWidth: true,  
+  });
+
+  imagesLoaded( gridRef.current ).on( 'progress', function() {
+    // layout Masonry after each image loads
+    masonry.layout();
+  });
 
   /* Fetch the data using the user's query */
   const url =
@@ -33,6 +38,21 @@ function Home(props) {
   process.env.REACT_APP_ACCESS_KEY}`
 
   const {data: imageData, isLoaded, errorMessage, numPosts} = useFetch(url);
+
+  /*window.onscroll = function(ev) {
+    //const bottom = ev.target.scrollHeight - ev.target.scrollTop === ev.target.clientHeight;
+    if ((window.innerHeight + window.pageYOffset ) >= document.body.offsetHeight) {
+      infiniteScroll()
+  }
+      
+  };
+
+  function infiniteScroll(){
+      setPage((oldPage) => {
+          return oldPage + 1;
+      });
+      console.log(page);
+  }*/
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,7 +64,7 @@ function Home(props) {
     setPage(++page);
   }
 
-  /* This code change like button text, add/remove liked images to array
+  /* This code changes like button text, adds/removes liked images to array
   ** likedArray is the initial array with heart image src values
   ** liked holds the heart image src values
   ** likedImages holds the actual image src values
@@ -74,17 +94,7 @@ function Home(props) {
       setLikedImages(theArray => [...theArray, imageGroup[index].urls.small]);
     }
     setLiked(newArray);
-  }/* End of likedImage code */
-
-  const grid = document.querySelector('.grid');
-  const masonry = new Masonry(grid, {
-    isFitWidth: true,  
-});
-
-  imagesLoaded( grid ).on( 'progress', function() {
-    // layout Masonry after each image loads
-    masonry.layout();
-  });
+  }
 
   return (
     <div className="Home">
@@ -107,7 +117,7 @@ function Home(props) {
       </div>
         
       <div className="Content">
-        <div className="grid">
+        <div className="grid" ref={gridRef}>
         {imageData && isLoaded && 
            (imageGroup.map((image, i)=>(
           <div  key={i}>

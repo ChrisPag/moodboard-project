@@ -13,6 +13,10 @@
     height:89%;
 }
 
-.react-draggable{
+/*.react-draggable{
+    max-width: 100%;
+}*/
+
+.moodboard img{
     max-width: 100%;
 }

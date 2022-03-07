@@ -4,19 +4,18 @@ import Moodboard from './components/Moodboard.js';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import { useState } from 'react';
 
+
 function App() {
   const [likes, setLikes] = useState();
  
   return (
     <Router>
-    <div className="App">
-      <Routes>
-        <Route exact path="/" element=
-          {<Home updateLikes={likes =>setLikes(likes)} />}
-        />
-        <Route path="/moodboard" element ={<Moodboard likes = {likes} />}/>
-      </Routes>
-    </div>
+      <div className="App">
+        <Routes>
+          <Route exact path="/" element={<Home updateLikes={likes =>setLikes(likes)} />}/>
+          <Route path="/moodboard" element ={<Moodboard likes = {likes} />}/>
+        </Routes>
+      </div>
     </Router>
   );
 }
