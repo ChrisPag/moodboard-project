@@ -1,12 +1,30 @@
 import '../css/Moodboard.css';
 import { useNavigate } from 'react-router-dom';
-import {DndProvider} from 'react-dnd';
-import {HTML5Backend} from 'react-dnd-html5-backend';
+import {useDrop} from 'react-dnd';
+import Photo from './Photo'
+import {useState} from 'react';
 
 function Moodboard(props) {
   const navigate = useNavigate();
+  const [canvas, setCanvas] = useState([]);
+  
+  /* useDrop accepts two arguments
+  ** {isOver} determines if an image is dropped
+  ** drop references where the images can be dropped and calls a function */
+  const [{isOver}, drop] = useDrop(({
+    accept: "image",
+    drop: (item) => addToCanvas(item.index),
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver(),
+    }),
+  }))
+
+  const addToCanvas = (index) =>{
+    const canvasPhotos = props.likes.filter((photo)=> props.likes.url === photo.index);
+    setCanvas((canvas)=> [...canvas, canvasPhotos[index]]);
+  }
+
   return (
-    <DndProvider backend={HTML5Backend}>
     <div className="Moodboard">
       <div className="moodHeader"> 
         <button id="back" className="btn" onClick={()=> navigate(-1)}>Back</button>
@@ -16,7 +34,7 @@ function Moodboard(props) {
             {props.likes && 
               (props.likes.map((likes, i)=>(
               <div className="moodboard-imgs" key={i}>
-                  <img src={likes}></img>
+                  <Photo url={likes.url} alt={likes.alt} index={i} />
               </div>
             )))}
 
@@ -24,8 +42,12 @@ function Moodboard(props) {
           <p>Could not load images</p>}
         </div> 
       </div>
+      <div className= "canvas" ref={drop}>
+        {canvas.map((photo, i)=>{
+          return <Photo url={photo.url} alt={photo.alt} key={i} />
+        })}
+      </div>
     </div>
-    </DndProvider>
   );
   }
   

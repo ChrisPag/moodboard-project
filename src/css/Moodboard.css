@@ -17,6 +17,14 @@
     max-width: 100%;
 }*/
 
-.moodboard img{
+.sidebar img{
     max-width: 100%;
+}
+
+.canvas{
+    width: 85%;
+    min-height:100px;
+    height: 85%;
+    margin-left:15%;
+    border: 2px solid black;
 }

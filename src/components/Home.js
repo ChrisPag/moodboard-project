@@ -87,11 +87,18 @@ function Home(props) {
 
     if(newArray[index]===red){
       newArray[index] = white;
-      setLikedImages(likedImages.filter(likedImages => likedImages !== imageGroup[index].urls.small))
+      setLikedImages(likedImages.filter(likedImages => likedImages.url !== 
+        /*{ url: imageGroup[index].urls.small,
+          alt: imageGroup[index].alt_description
+        }*/
+        imageGroup[index].urls.small))
     }
     else{
       newArray[index] = red;
-      setLikedImages(theArray => [...theArray, imageGroup[index].urls.small]);
+      setLikedImages(theArray => [...theArray, {
+        url: imageGroup[index].urls.small,
+        alt: imageGroup[index].alt_description
+      }]);
     }
     setLiked(newArray);
   }
@@ -122,7 +129,7 @@ function Home(props) {
            (imageGroup.map((image, i)=>(
           <div  key={i}>
               <img  className="images" src={image.urls.small} alt={image.alt_description} ></img>
-              <span><button className='likeButton' onClick={()=>handleClick(i)}> <img className="heart" src={liked[i]}></img> </button></span>
+              <span><button className='likeButton' onClick={()=>handleClick(i)}> <img className="heart" alt="like button" src={liked[i]}></img> </button></span>
           </div>
         )))}
         </div>
