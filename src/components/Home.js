@@ -14,7 +14,7 @@ function Home(props) {
   const [query, setQuery] = useState("");
   const [showButton, setShowButton] = useState(false);
   const [likedImages, setLikedImages] = useState([]);
-  
+  console.log('hi');
 
   const red = 'red.png';
   const white = 'white.png';
