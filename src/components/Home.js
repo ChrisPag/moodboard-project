@@ -13,8 +13,8 @@ function Home(props) {
   const [userInput, setUserInput] = useState("");
   const [query, setQuery] = useState("");
   const [showButton, setShowButton] = useState(false);
-  const [imageGroup, setImageGroup] = useState();
   const [likedImages, setLikedImages] = useState([]);
+  
 
   const red = 'red.png';
   const white = 'white.png';
@@ -39,20 +39,21 @@ function Home(props) {
 
   const {data: imageData, isLoaded, errorMessage, numPosts} = useFetch(url);
 
-  /*window.onscroll = function(ev) {
+  const [imageGroup, setImageGroup] = useState(imageData.results);
+
+
+  window.onscroll = function(ev) {
     //const bottom = ev.target.scrollHeight - ev.target.scrollTop === ev.target.clientHeight;
     if ((window.innerHeight + window.pageYOffset ) >= document.body.offsetHeight) {
       infiniteScroll()
-  }
-      
+    }
   };
 
   function infiniteScroll(){
-      setPage((oldPage) => {
-          return oldPage + 1;
-      });
-      console.log(page);
-  }*/
+     setPage((oldPage) => {
+       return oldPage + 1;
+     });
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -60,6 +61,7 @@ function Home(props) {
     setShowButton(!showButton);
   }
 
+  
   const showMore = () =>{
     setPage(++page);
   }
@@ -74,7 +76,15 @@ function Home(props) {
 
   useEffect(()=>{
     setLiked(likedArray);
-    setImageGroup(imageData.results);
+
+    if (imageGroup) {
+      setImageGroup(oldImageArray => [...oldImageArray, 
+        imageData.results  
+      ])}
+    else {
+      setImageGroup(imageData.results);
+    }
+    console.log(imageData.results)
   },[numPosts, imageData, query])
   
   useEffect(()=>{
