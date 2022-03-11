@@ -14,6 +14,7 @@ function Home(props) {
   const [query, setQuery] = useState("");
   const [showButton, setShowButton] = useState(false);
   const [likedImages, setLikedImages] = useState([]);
+  //const [numDisplayed, setNumDisplayed] = useState(0);
 
   const red = 'red.png';
   const white = 'white.png';
@@ -39,7 +40,7 @@ function Home(props) {
   const {data: imageData, isLoaded, errorMessage, numPosts} = useFetch(url);
   const [imageGroup, setImageGroup] = useState([]);
 
-  /* Infinite Scroll */
+  /* Infinite Scroll 
   window.onscroll = function(ev) {
     //const bottom = ev.target.scrollHeight - ev.target.scrollTop === ev.target.clientHeight;
     if ((window.innerHeight + window.pageYOffset ) >= document.body.offsetHeight) {
@@ -47,15 +48,15 @@ function Home(props) {
     }
   };
 
-  /* infinite scroll*/
   const [displayed, setDisplayed] = useState([]);
   function infiniteScroll(){
     setPage(++page);
 
-    /*infinite scroll*/
+    setImageGroup(imageData.results);
+
     setDisplayed(displayed.concat(imageGroup));
-    console.log(imageGroup);
-  }
+    console.log(displayed);
+  }*/
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -63,8 +64,14 @@ function Home(props) {
     setShowButton(!showButton);
   }
 
-  const showMore = () =>{
+  const nextPage = () =>{
     setPage(++page);
+  }
+
+  const prevPage = () =>{
+    if(page>=2){
+      setPage(--page);
+    }
   }
 
   /* This code changes like button text, adds/removes liked images to array
@@ -79,10 +86,10 @@ function Home(props) {
     setLiked(likedArray);
     setImageGroup(imageData.results);
     
-    /*infinite scroll*/
+    /*infinite scroll
     if(imageGroup && page==1){
       setDisplayed(imageGroup);
-    }
+    }*/
     
   },[numPosts, imageData, query])
  
@@ -130,9 +137,9 @@ function Home(props) {
       <div className="Content">
         <div className="grid" ref={gridRef}>
         {imageData && isLoaded && 
-           /*infinite scroll*/
-           (displayed.map((image, i)=>(
-          /*(imageGroup.map((image, i)=>(*/
+           /*infinite scroll
+           (displayed.map((image, i)=>(*/
+          (imageGroup.map((image, i)=>(
           <div  key={i}>
               <img  className="images" src={image.urls.small} alt={image.alt_description} ></img>
               <span><button className='likeButton' onClick={()=>handleClick(i)}> <img className="heart" alt="like button" src={liked[i]}></img> </button></span>
@@ -143,7 +150,9 @@ function Home(props) {
         {!isLoaded && !errorMessage && <p>Loading...</p>}
         {errorMessage && <p> {errorMessage}</p>}
 
-        {query && <button onClick = {showMore} id="nextPage" className="btn">Next Page</button>}
+        {query && <button onClick = {nextPage} id="nextPage" className="btn">Next</button>}
+        {query && page>=2 &&
+         <button onClick = {prevPage} id="prevPage" className="btn">Previous</button>}
       </div>
     </div>
   );
