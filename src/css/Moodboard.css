@@ -22,9 +22,8 @@
 }
 
 .canvas{
-    width: 85%;
-    min-height:100px;
-    height: 85%;
+    width: 84.5%;
+    height: 850px;
     margin-left:15%;
     border: 2px solid black;
 }
