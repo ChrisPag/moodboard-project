@@ -14,7 +14,6 @@ function Home(props) {
   const [query, setQuery] = useState("");
   const [showButton, setShowButton] = useState(false);
   const [likedImages, setLikedImages] = useState([]);
-  console.log('hi');
 
   const red = 'red.png';
   const white = 'white.png';
@@ -38,10 +37,9 @@ function Home(props) {
   process.env.REACT_APP_ACCESS_KEY}`
 
   const {data: imageData, isLoaded, errorMessage, numPosts} = useFetch(url);
+  const [imageGroup, setImageGroup] = useState([]);
 
-  const [imageGroup, setImageGroup] = useState(imageData.results);
-
-
+  /* Infinite Scroll */
   window.onscroll = function(ev) {
     //const bottom = ev.target.scrollHeight - ev.target.scrollTop === ev.target.clientHeight;
     if ((window.innerHeight + window.pageYOffset ) >= document.body.offsetHeight) {
@@ -49,10 +47,14 @@ function Home(props) {
     }
   };
 
+  /* infinite scroll*/
+  const [displayed, setDisplayed] = useState([]);
   function infiniteScroll(){
-     setPage((oldPage) => {
-       return oldPage + 1;
-     });
+    setPage(++page);
+
+    /*infinite scroll*/
+    setDisplayed(displayed.concat(imageGroup));
+    console.log(imageGroup);
   }
 
   const handleSubmit = (e) => {
@@ -61,7 +63,6 @@ function Home(props) {
     setShowButton(!showButton);
   }
 
-  
   const showMore = () =>{
     setPage(++page);
   }
@@ -76,31 +77,24 @@ function Home(props) {
 
   useEffect(()=>{
     setLiked(likedArray);
-
-    if (imageGroup) {
-      setImageGroup(oldImageArray => [...oldImageArray, 
-        imageData.results  
-      ])}
-    else {
-      setImageGroup(imageData.results);
+    setImageGroup(imageData.results);
+    
+    /*infinite scroll*/
+    if(imageGroup && page==1){
+      setDisplayed(imageGroup);
     }
-    console.log(imageData.results)
+    
   },[numPosts, imageData, query])
-  
+ 
   useEffect(()=>{
       setLikedImages(likedImages);
-      console.log(likedImages);
   }, [liked])
 
   const handleClick = (index) =>{
     let newArray = [...liked];
-
     if(newArray[index]===red){
       newArray[index] = white;
       setLikedImages(likedImages.filter(likedImages => likedImages.url !== 
-        /*{ url: imageGroup[index].urls.small,
-          alt: imageGroup[index].alt_description
-        }*/
         imageGroup[index].urls.small))
     }
     else{
@@ -136,7 +130,9 @@ function Home(props) {
       <div className="Content">
         <div className="grid" ref={gridRef}>
         {imageData && isLoaded && 
-           (imageGroup.map((image, i)=>(
+           /*infinite scroll*/
+           (displayed.map((image, i)=>(
+          /*(imageGroup.map((image, i)=>(*/
           <div  key={i}>
               <img  className="images" src={image.urls.small} alt={image.alt_description} ></img>
               <span><button className='likeButton' onClick={()=>handleClick(i)}> <img className="heart" alt="like button" src={liked[i]}></img> </button></span>
