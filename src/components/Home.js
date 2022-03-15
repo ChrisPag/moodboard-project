@@ -2,11 +2,14 @@
 search results (content) and button to link
 to the moodboard creation page*/
 import '../css/Home.css';
+import '../css/Modal.css';
+import React from 'react'
 import useFetch from './useFetch';
 import { useState, useEffect, useRef } from 'react';
 import {Link} from 'react-router-dom';
 import Masonry from 'masonry-layout';
 import imagesLoaded from 'imagesloaded';
+import Modal from 'react-modal';
 
 function Home(props) {
   let [page, setPage] = useState(1);
@@ -14,6 +17,11 @@ function Home(props) {
   const [query, setQuery] = useState("");
   const [showButton, setShowButton] = useState(false);
   const [likedImages, setLikedImages] = useState([]);
+  const [Loaded, setLoaded] = useState(false);
+  const [isPageLoaded, setIsPageLoaded] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  var modalStyles = {overlay: {zIndex: 10}};
+
   //const [numDisplayed, setNumDisplayed] = useState(0);
 
   const red = 'red.png';
@@ -22,19 +30,23 @@ function Home(props) {
   /*Set up masonry when images load*/
   const gridRef = useRef();
   const masonry = new Masonry(gridRef.current, {
-    isFitWidth: true,  
+    isFitWidth: true, 
+    transitionDuration: 0 
   });
 
   imagesLoaded( gridRef.current ).on( 'progress', function() {
-    // layout Masonry after each image loads
+    /*layout Masonry after each image loads*/
     masonry.layout();
   });
 
+  /*Refresh page when logo is clicked*/
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
   /* Fetch the data using the user's query */
   const url =
-  `https://api.unsplash.com/search/photos/?page=${page}
-  &query=${query}
-  &client_id=${
+  `https://api.unsplash.com/search/photos/?page=${page}&per_page=25&query=${query} &client_id=${
   process.env.REACT_APP_ACCESS_KEY}`
 
   const {data: imageData, isLoaded, errorMessage, numPosts} = useFetch(url);
@@ -58,10 +70,27 @@ function Home(props) {
     console.log(displayed);
   }*/
 
+  /*Showing "popular" query on window load*/
+  useEffect(() => {
+    setLoaded(true);
+}, []);
+
+useEffect(() => {
+    if (Loaded) {
+        setIsPageLoaded(true);
+        setQuery("colourful");
+        setModalIsOpen(true);
+    }
+}, [Loaded]);
+
+
+
+  /*Showing user-submitted query*/
   const handleSubmit = (e) => {
     e.preventDefault();
     setQuery(userInput);
     setShowButton(!showButton);
+    setPage(1);
   }
 
   const nextPage = () =>{
@@ -113,11 +142,10 @@ function Home(props) {
     }
     setLiked(newArray);
   }
-
   return (
     <div className="Home">
       <div className="homeHeader">
-        <img className="logo" src="logo.png"></img>
+        <img className="logo" src="logo.png" onClick={refreshPage}></img>
         <div className="Search">
           <form onSubmit = {handleSubmit}>
               <input type ="text"
@@ -154,6 +182,16 @@ function Home(props) {
         {query && page>=2 &&
          <button onClick = {prevPage} id="prevPage" className="btn">Previous</button>}
       </div>
+      <Modal className="modal" isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} closeTimeoutMS={500} style={ modalStyles }>
+        <div>
+            <img src='modal.gif'></img>
+            <div className='modalText'>
+              <p>Find the images that match your mood.</p>
+              <p>Create your own beautiful moodboards.</p>
+            </div>
+            <button onClick={() => setModalIsOpen(false)} id="modalGotIt" className="btn">Got it!</button>
+        </div>
+      </Modal>
     </div>
   );
 }

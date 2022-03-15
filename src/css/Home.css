@@ -57,6 +57,7 @@ a {
     float:left;
     margin-left:6.5%;
     margin-top: -5px;
+    cursor: pointer;
 }
 
 .Search {

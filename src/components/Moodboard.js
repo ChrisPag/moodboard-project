@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import {useDrop} from 'react-dnd';
 import Photo from './Photo'
 import {useState} from 'react';
-import { customDragLayer } from './customDragLayer';
+import React from 'react'
 
 
 function Moodboard(props) {

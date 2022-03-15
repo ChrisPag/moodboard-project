@@ -1,5 +1,6 @@
 import {useDrag} from 'react-dnd';
 import {useEffect} from 'react';
+import React from 'react'
 
 
 
@@ -22,7 +23,7 @@ function Photo(props) {
     })*/
 
     return (  
-        <img ref={drag} src={props.url}></img>
+        <img ref={drag} src={props.url} role="image"></img>
     );
 }
 
