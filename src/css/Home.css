@@ -51,6 +51,12 @@ a {
     margin-left: 6.5%;
 }
 
+#download {
+    float: right;
+    margin-right: 2%;
+
+}
+
 .logo {
     display: block;
     width: 120px;
