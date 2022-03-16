@@ -4,27 +4,51 @@ import {useState, useCallback, useEffect, useRef} from 'react';
 import Draggable from 'react-draggable';
 import React , { Component}  from 'react';
 import ColorPicker from './ColorPicker';
+//import { Resizable, ResizableBox } from 'react-resizable';
 
-//example
 function Moodboard(props) {
   const navigate = useNavigate();
   const [canvasPhotos, setCanvasPhotos] = useState([]);
-  const [state, updateState] = React.useState('#FFFFFF');
+  const zIndexList = new Array(canvasPhotos.length).fill(0);
+  const [zIndexProp, setzIndex] = useState([]);
 
-/* Changing the background color value */
-  const handleInput = (e) => {
-    updateState(e.target.value);
-  }
+  const resizeRef = useRef();
 
   const addToCanvas = (index) =>{
     const movedPhotos = props.likes.filter((photo)=> props.likes.url === photo.index);
     setCanvasPhotos((canvasPhotos)=> [...canvasPhotos, movedPhotos[index]]);
   }
 
+  /* Changing the background color value */
+  const [state, updateState] = React.useState('#FFFFFF');
+  
+
+  const handleInput = (e) => {
+    updateState(e.target.value);
+  }
+
   useEffect(()=>{
-    console.log(canvasPhotos);
     setCanvasPhotos(canvasPhotos);
+    setzIndex(zIndexList);
+    console.log(canvasPhotos);
+    console.log(zIndexProp);
   },[canvasPhotos]);
+
+  const moveToFront = (index) =>{
+    //set the temp array to original array (all 0)
+    let tempArray = [...zIndexList];
+    if(tempArray[index]===1){
+      tempArray[index] = 0;
+    }
+    else{
+      tempArray[index] = 1;
+    }
+
+    //change the zIndex of the given image only
+    setzIndex(tempArray);
+
+    console.log(zIndexProp);
+  }
 
   return (
     
@@ -47,16 +71,25 @@ function Moodboard(props) {
           <p>Could not load images</p>}
         </div> 
       </div>
+
+      
       <div className= "canvas" id="canvasColor" style={{backgroundColor: state}}>
         {/* The canvas is where liked images (beside the sidebar) can be added to*/}
-
-          {canvasPhotos.map((photo, i)=>{
+          {canvasPhotos.map((photo, j)=>{
           return (
-            
-          <Draggable 
+          
+          <Draggable
           bounds="parent">
-            <img src={photo.url} alt={photo.alt} index={i} className="moodImages" />
-          </Draggable>)
+            <div className="draggable" key={j} style={{zIndex: zIndexProp[j]}}>
+              
+              <button ref={resizeRef}>move</button>
+              <button className="move" type='button' onClick={() =>moveToFront(j)}>Move to front</button>
+              <img  src={photo.url} alt={photo.alt} index={j} className="moodImages"
+              //style={{width: size.x, height: size.y}} 
+              />
+            </div>
+          </Draggable>
+          )
         })}
       </div>
     </div>
