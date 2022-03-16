@@ -18,9 +18,48 @@
 }
 
 .canvas{
-    width: 84.5%;
+    max-width: 100%;
     height: 850px;
     margin-left:15%;
     border: 2px solid black;
     position:relative;
+}
+
+.moodImages {
+    position: absolute;
+}
+
+.colorPicker {
+    display: inline-flex;
+    align-items: center;
+    width: 140px;
+    padding: 6px 12px;
+    margin-left: 100px;
+    border: 1px solid #bfc9d9;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.colorBox {
+    padding: 0px;
+    border: transparent;
+    height: 34px;
+}
+
+.hexCode {
+    border: none;
+    background: none;
+    font-size: 15px;
+    text-transform: uppercase;
+    width:70px;
+    margin-left: 10px;;
+}
+
+.addButton {
+    border:none;
+    background-color: transparent;
+}
+
+.plus {
+    width: 30px;
 }
