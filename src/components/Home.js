@@ -47,7 +47,7 @@ function Home(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setQuery(userInput);
+    setQuery(userInput.toUpperCase());
     setPage(1);
     setShowNums(true);
   }
@@ -55,7 +55,6 @@ function Home(props) {
   /*** Showing "popular" query on window load ***/
   useEffect(() => {
     setQuery("colourful");
-    console.log(imageData);
   }, []);
 
   /*** Handle results pages ***/
@@ -63,7 +62,6 @@ function Home(props) {
     let tempResults = resultNum;
     setPage(++page);
     setResultNum({start: (tempResults.start + 25), end: (tempResults.end+25)});
-    console.log(resultNum);
   }
 
   const prevPage = () =>{
@@ -89,7 +87,6 @@ function Home(props) {
   useEffect(()=>{
     setHeartList(initialHearts);
     setDisplayedImgs(imageData.results);
-    
   },[numPosts, imageData, query])
 
   useEffect(()=>{
@@ -134,7 +131,11 @@ function Home(props) {
       </div>
         
       <div className="Content">
-        {showNums && <p>Showing {resultNum.start} - {resultNum.end} out of {imageData.total} results for "{query}"</p>}
+        {showNums && 
+        <div id="results">
+          <h1>{query}</h1>
+          <p>Showing {resultNum.start} - {resultNum.end} out of {imageData.total} results</p>
+        </div>}
         <div className="grid" ref={gridRef}>
         {imageData && isLoaded && 
           (displayedImgs.map((image, i)=>(

@@ -11,14 +11,19 @@ function Moodboard(props) {
   const canvasRef = useRef();
 
   /*** User inputs filename ***/
-  const [moodboardName, setMoodboardName] = useState("moodboard");
+  const [moodboardName, setMoodboardName] = useState();
   const [nameInput, setNameInput] = useState("");
+
   const handleName = (e) =>{
     e.preventDefault();
     setMoodboardName(nameInput);
     screenshot(canvasRef.current, moodboardName);
   }
   
+  useEffect(()=>{
+    setMoodboardName(nameInput);
+  },[nameInput]);
+
   /* Changing the background color value */
   const [state, updateState] = useState('#f8f8f8');
   const handleInput = (e) => {
@@ -69,7 +74,7 @@ function Moodboard(props) {
       <div className="moodHeader"> 
         <button id="back" className="btn" onClick={()=> navigate(-1)}>Back</button>
         <ColorPicker value={state} onChange={handleInput} title="Change Background Color"/>
-        <form onSubmit={(e)=>handleName(e)}>
+        <form onSubmit={handleName}>
           <input type ="text"
             placeholder="Moodboard Name"
             value = { nameInput }
