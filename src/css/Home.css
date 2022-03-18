@@ -1,8 +1,8 @@
 /*Home.css includes Home.js, Content.js, and Search.js*/
 
 a {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
+    font-family: 'nunito';
+    font-weight: 600;
     text-decoration:none;
     color:white;
 }

@@ -6,13 +6,13 @@
     padding-top: 50px;
 }
 .btn{
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
+    font-family: 'Nunito';
+    font-weight: 600;
     border-radius: 50px;
-    font-size: 18px;
+    font-size: 20px;
     border: none;
     color:white;
-    padding: 12px 26px;
+    padding: 10px 24px;
     text-align: center;
     background-color: #E8423F;
     transition: 0.3s;
@@ -70,6 +70,7 @@
     border-radius: 50px;
     border-style: none;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+    font-family: 'nunito';
     font-size: 18px;
 }
 
@@ -126,18 +127,18 @@
     border-style: none none none none;
     background-color: transparent;
     width:200px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 22px;
+    font-family: 'open sans';
+    font-size: 20px;
     color: #353535;  
     outline:none;
-    font-weight: bold;
-    letter-spacing: 0.5px;;
+    font-weight: 700 ;
+    letter-spacing: 0.25px;;
 }
 
 ::placeholder {
     font-size: 20px;
     color: rgb(116, 116, 116);
-    font-weight: 500;
+    font-weight: 400;
   }
   
   .moodForm div {
@@ -147,10 +148,10 @@
   }
 
 .downloadBtn {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
+    font-family: 'nunito';
+    font-weight: 600;
     border-radius: 50px;
-    font-size: 18px;
+    font-size: 20px;
     border: none;
     color:white;
     padding: 12px 26px;
@@ -158,7 +159,7 @@
     background-color: #E8423F;
     transition: 0.3s;
     cursor: pointer;
-    width: 142px;
+    width: 144px;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 10px;
 
 }
