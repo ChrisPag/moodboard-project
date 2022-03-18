@@ -78,8 +78,8 @@ function Home(props) {
   },[query])
  
   /*** Change like button text, adds/removes liked images to array ***/
-  const red = 'red.png';
-  const white = 'white.png';
+  const red = 'red2.png';
+  const white = 'white2.png';
   const [likedImages, setLikedImages] = useState([]); /*holds image src values */
   const initialHearts = new Array(numPosts).fill(white); /*initial array with heart image src values*/
   const [heartList, setHeartList] = useState([]); /*liked holds the heart image src values*/

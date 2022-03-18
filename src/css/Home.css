@@ -100,7 +100,7 @@ a {
 .grid div span {
     position: absolute;
     bottom: 75px;
-    right: 65px;
+    right: 70px;
     z-index: 1;
 }
 .likeButton{
@@ -116,8 +116,13 @@ a {
 }
 
 .heart {
-    width: 40px;
-    cursor: pointer;
+    width: 45px;
+    cursor: pointer;  
+    transition: 0.5s;
+}
+
+.heart:hover {
+    transform: scale(1.15);
 }
 
 #results {

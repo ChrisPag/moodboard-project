@@ -95,7 +95,7 @@ function Moodboard(props) {
                 <img src={likes.url} alt={likes.alt} index={i} />
                 <span> 
                   <button onClick={()=>addToCanvas(i)} className="addButton" title="Add to Moodboard">
-                    <img className="addImage" src="add.png" alt="add"></img>
+                    <img className="addImage" src="add2.png" alt="add"></img>
                   </button> 
                 </span>
             </div>
