@@ -9,6 +9,7 @@ import screenshot from './Screenshot';
 function Moodboard(props) {
   const navigate = useNavigate();
   const canvasRef = useRef();
+  const [imageList, setImageList] = useState(props.likes);
 
   /*** User inputs filename ***/
   const [moodboardName, setMoodboardName] = useState();
@@ -22,6 +23,7 @@ function Moodboard(props) {
   
   useEffect(()=>{
     setMoodboardName(nameInput);
+    
   },[nameInput]);
 
   /* Changing the background color value */
@@ -42,11 +44,12 @@ function Moodboard(props) {
 
   /*** Remove from canvas ***/
   const removeFromCanvas = (index) =>{
-    let tempArray = canvasPhotos.filter(canvasPhotos=> canvasPhotos.url !==
-      props.likes[index].url
+    let tempArray = canvasPhotos.filter(canvasPhotos=> imageList[index].url !==
+       canvasPhotos.url
     );
     
     setCanvasPhotos(tempArray);
+    console.log(canvasPhotos[index]);
   }
 
   /*** Move to front button ***/
@@ -65,7 +68,7 @@ function Moodboard(props) {
 
   /*** Update when new photo is added ***/
   useEffect(()=>{
-    setCanvasPhotos(canvasPhotos);
+    setImageList(canvasPhotos);
     setzIndex(zIndexList);
   },[canvasPhotos]);
 

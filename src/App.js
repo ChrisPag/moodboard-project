@@ -14,7 +14,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route exact path="/" element={<Home updateLikes={likes =>setLikes(likes)} />}/>
-          <Route path="/moodboard" element ={<Moodboard likes = {likes} />}/>
+          <Route path="/moodboard" element ={<Moodboard likes = {likes} key={likes} />}/>
         </Routes>
       </div>
     </Router>
