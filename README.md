@@ -1,9 +1,6 @@
 # Moodscape
-**Note:** 
-This project is still in progress; our next steps are to allow images on the canvas to be dragged around freely, rather than having them just snap to the canvas. 
-
 ## About
-Moodscape is an app that allows users to easily create moodboards, or, in other words, collages that are used to convey a certain feeling or aesthetic. Users can search for images using the Unsplash API, and can add their liked images to a canvas. Images on the canvas can be dragged around as needed.
+Moodscape is an app that allows users to easily create moodboards, or, in other words, collages that are used to convey a certain feeling or aesthetic. Users can search for images (powered by the Unsplash API), and can add their liked images to a canvas. Images on the canvas can be dragged around, deleted, and layered as needed. Additionally, the canvas background colour can be changed. The user can then download their creation to their own device.
 
 ## Technologies
 * ReactJS
@@ -12,11 +9,13 @@ Moodscape is an app that allows users to easily create moodboards, or, in other 
 ## Dependencies
 * Masonry-Layout
 * ImagesLoaded
-* React-DnD
-* React-DnD-HTML5-Backend
+* React-Color
+* React-Modal
+* Html2canvas
+* React-Draggable
 * React-Router-DOM
 
->## Getting Started with Create React App
+## Getting Started with Create React App
 >
 >This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 >
