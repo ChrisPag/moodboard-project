@@ -1,33 +1,21 @@
-/* This file is a container for the search bar,
-search results (content) and button to link
-to the moodboard creation page*/
+/* This file is a container for the search bar, search results (content) and button 
+to link to the moodboard creation page*/
 import '../css/Home.css';
 import '../css/Modal.css';
-import React from 'react'
+import React from 'react';
 import useFetch from './useFetch';
 import { useState, useEffect, useRef } from 'react';
 import {Link} from 'react-router-dom';
 import Masonry from 'masonry-layout';
 import imagesLoaded from 'imagesloaded';
-import Modal from 'react-modal';
+import IntroModal from './IntroModal';
 
 function Home(props) {
   let [page, setPage] = useState(1);
   const [userInput, setUserInput] = useState("");
   const [query, setQuery] = useState("");
-  const [showButton, setShowButton] = useState(false);
-  const [likedImages, setLikedImages] = useState([]);
-  const [Loaded, setLoaded] = useState(false);
-  const [isPageLoaded, setIsPageLoaded] = useState(false);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  var modalStyles = {overlay: {zIndex: 10}};
-
-  //const [numDisplayed, setNumDisplayed] = useState(0);
-
-  const red = 'red.png';
-  const white = 'white.png';
-
-  /*Set up masonry when images load*/
+  
+  /*** Set up masonry when images load ***/
   const gridRef = useRef();
   const masonry = new Masonry(gridRef.current, {
     isFitWidth: true, 
@@ -39,12 +27,12 @@ function Home(props) {
     masonry.layout();
   });
 
-  /*Refresh page when logo is clicked*/
+  /*** Refresh page when logo is clicked ***/
   function refreshPage() {
     window.location.reload(false);
   }
 
-  /* Fetch the data using the user's query */
+  /*** Fetch the data using the user's query ***/
   const url =
   `https://api.unsplash.com/search/photos/?page=${page}&per_page=25&query=${query} &client_id=${
   process.env.REACT_APP_ACCESS_KEY}`
@@ -52,47 +40,18 @@ function Home(props) {
   const {data: imageData, isLoaded, errorMessage, numPosts} = useFetch(url);
   const [imageGroup, setImageGroup] = useState([]);
 
-  /* Infinite Scroll 
-  window.onscroll = function(ev) {
-    //const bottom = ev.target.scrollHeight - ev.target.scrollTop === ev.target.clientHeight;
-    if ((window.innerHeight + window.pageYOffset ) >= document.body.offsetHeight) {
-      infiniteScroll()
-    }
-  };
-
-  const [displayed, setDisplayed] = useState([]);
-  function infiniteScroll(){
-    setPage(++page);
-
-    setImageGroup(imageData.results);
-
-    setDisplayed(displayed.concat(imageGroup));
-    console.log(displayed);
-  }*/
-
-  /*Showing "popular" query on window load*/
-  useEffect(() => {
-    setLoaded(true);
-}, []);
-
-useEffect(() => {
-    if (Loaded) {
-        setIsPageLoaded(true);
-        setQuery("colourful");
-        setModalIsOpen(true);
-    }
-}, [Loaded]);
-
-
-
-  /*Showing user-submitted query*/
   const handleSubmit = (e) => {
     e.preventDefault();
     setQuery(userInput);
-    setShowButton(!showButton);
     setPage(1);
   }
 
+  /*** Showing "popular" query on window load ***/
+  useEffect(() => {
+    setQuery("colourful");
+  }, []);
+
+  /*** Handle results pages ***/
   const nextPage = () =>{
     setPage(++page);
   }
@@ -103,23 +62,19 @@ useEffect(() => {
     }
   }
 
-  /* This code changes like button text, adds/removes liked images to array
-  ** likedArray is the initial array with heart image src values
-  ** liked holds the heart image src values
-  ** likedImages holds the actual image src values
-  */
+  /** Change like button text, adds/removes liked images to array
+  *** likedArray is the initial array with heart image src values
+  *** liked holds the heart image src values
+  *** likedImages holds the actual image src values ***/
+  const red = 'red.png';
+  const white = 'white.png';
+  const [likedImages, setLikedImages] = useState([]);
   const likedArray = new Array(numPosts).fill(white);
   const [liked, setLiked] = useState([]);
 
   useEffect(()=>{
     setLiked(likedArray);
     setImageGroup(imageData.results);
-    
-    /*infinite scroll
-    if(imageGroup && page==1){
-      setDisplayed(imageGroup);
-    }*/
-    
   },[numPosts, imageData, query])
  
   useEffect(()=>{
@@ -142,6 +97,7 @@ useEffect(() => {
     }
     setLiked(newArray);
   }
+
   return (
     <div className="Home">
       <div className="homeHeader">
@@ -165,8 +121,6 @@ useEffect(() => {
       <div className="Content">
         <div className="grid" ref={gridRef}>
         {imageData && isLoaded && 
-           /*infinite scroll
-           (displayed.map((image, i)=>(*/
           (imageGroup.map((image, i)=>(
           <div  key={i}>
               <img  className="images" src={image.urls.small} alt={image.alt_description} ></img>
@@ -182,16 +136,7 @@ useEffect(() => {
         {query && page>=2 &&
          <button onClick = {prevPage} id="prevPage" className="btn">Previous</button>}
       </div>
-      <Modal className="modal" isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} closeTimeoutMS={500} style={ modalStyles }>
-        <div>
-            <img src='modal.gif'></img>
-            <div className='modalText'>
-              <p>Find the images that match your mood.</p>
-              <p>Create your own beautiful moodboards.</p>
-            </div>
-            <button onClick={() => setModalIsOpen(false)} id="modalGotIt" className="btn">Got it!</button>
-        </div>
-      </Modal>
+      <IntroModal /> 
     </div>
   );
 }
