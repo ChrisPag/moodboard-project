@@ -22,7 +22,7 @@
     height: 80%;
     margin-left:17%;
     margin-top:2%;
-    border: 2px solid white;
+    border: none;
     position: fixed;
 }
 
@@ -30,9 +30,6 @@
     position:absolute;
     cursor: pointer;
 
-}
-
-.moodImages {
 }
 
 .colorPicker {
@@ -72,7 +69,7 @@
     margin-left: 80%;
     width:15%;
     height: 15%;
-    /*background-color: transparent;*/
+    background-color: transparent;
 }
 
 .plus {
@@ -148,6 +145,54 @@
     width: 20px;
 }
 
-.Moodboard form{
-    float:right;
+.moodForm{
+    display: grid;
+    width: 50%;
+    float: right;
+}
+
+.nameInput {
+    grid-column: 1;
+    border: 2px solid grey;
+    border-style: none none none none;
+    background-color: transparent;
+    width:200px;
+    font-family: 'Avenir', sans-serif;
+    font-size: 22px;
+    color: #353535;  
+    outline:none;
+    font-weight: bold;
+    letter-spacing: 0.5px;;
+}
+
+::placeholder {
+    font-size: 20px;
+    color: rgb(116, 116, 116);
+    font-weight: 100;
+  }
+  
+  .moodForm div {
+    grid-column: 2;
+    justify-self: end;
+    margin-right: 8%;
+  }
+
+.downloadBtn {
+    font-family: 'Avenir', sans-serif;
+    border-radius: 50px;
+    font-size: 18px;
+    border: none;
+    color:white;
+    padding: 12px 26px;
+    text-align: center;
+    background-color: #E8423F;
+    transition: 0.3s;
+    cursor: pointer;
+    width: 135px;
+}
+
+.empty {
+    font-size: 15px;
+    color: #6e6e6e;
+    margin-left: 10%;
 }

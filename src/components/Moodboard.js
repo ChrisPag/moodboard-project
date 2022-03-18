@@ -25,7 +25,7 @@ function Moodboard(props) {
   },[nameInput]);
 
   /* Changing the background color value */
-  const [state, updateState] = useState('#f8f8f8');
+  const [state, updateState] = useState('#eeeeee');
   const handleInput = (e) => {
     updateState(e.target.value);
   }
@@ -74,14 +74,16 @@ function Moodboard(props) {
       <div className="moodHeader"> 
         <button id="back" className="btn" onClick={()=> navigate(-1)}>Back</button>
         <ColorPicker value={state} onChange={handleInput} title="Change Background Color"/>
-        <form onSubmit={handleName}>
+        <form onSubmit={handleName} className="moodForm">
           <input type ="text"
             placeholder="Moodboard Name"
             value = { nameInput }
             onChange={(e) => setNameInput(e.target.value)}
             className="nameInput"
           ></input>
-          <button id="download" className="btn" >Download</button>
+          <div>
+            <button id="download" className="downloadBtn" >Download</button>
+          </div>
         </form>
         
       </div>
@@ -99,7 +101,7 @@ function Moodboard(props) {
             </div>
             )))}
           {!props.likes &&
-          <p>Could not load images</p>}
+          <p className="empty">There are no liked images yet.</p>}
         </div> 
         
         <div ref={canvasRef} className= "canvas" id="canvasColor" style={{backgroundColor: state}}>

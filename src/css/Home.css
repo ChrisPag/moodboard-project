@@ -22,6 +22,7 @@ a {
     background-color: #E8423F;
     transition: 0.3s;
     cursor: pointer;
+    display: inline-flex;
   }
   
   .btn:hover {
@@ -49,12 +50,6 @@ a {
 #back {
     float: left;
     margin-left: 6.5%;
-}
-
-#download {
-    float: right;
-    margin-right: 2%;
-
 }
 
 .logo {
@@ -94,7 +89,7 @@ a {
 }
 
 .grid {
-  margin: 20px auto;
+  margin: 10px auto;
 }
 
 .images {
@@ -123,6 +118,21 @@ a {
 .heart {
     width: 40px;
     cursor: pointer;
+}
+
+#results {
+    margin-left: 1.5%;
+}
+
+#results h1 {
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+#results p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: grey;
 }
 
 @media only screen and (max-width: 1500px) {
