@@ -12,21 +12,26 @@ import IntroModal from './IntroModal';
 
 function Home(props) {
   let [page, setPage] = useState(1);
+  let [resultNum, setResultNum] = useState({start: 1, end: 25});
   const [userInput, setUserInput] = useState("");
   const [query, setQuery] = useState("");
+  const [showNums, setShowNums] = useState(false);
   
   /*** Set up masonry when images load ***/
   const gridRef = useRef();
-  const masonry = new Masonry(gridRef.current, {
-    isFitWidth: true, 
-    transitionDuration: 0 
-  });
 
-  imagesLoaded( gridRef.current ).on( 'progress', function() {
-    /*layout Masonry after each image loads*/
-    masonry.layout();
-  });
-
+  if(gridRef.current){
+    const masonry = new Masonry(gridRef.current, {
+      isFitWidth: true, 
+      transitionDuration: 0 
+    });
+  
+    imagesLoaded( gridRef.current ).on( 'progress', function() {
+      /*layout Masonry after each image loads*/
+      masonry.layout();
+    });
+  }
+  
   /*** Refresh page when logo is clicked ***/
   function refreshPage() {
     window.location.reload(false);
@@ -38,64 +43,74 @@ function Home(props) {
   process.env.REACT_APP_ACCESS_KEY}`
 
   const {data: imageData, isLoaded, errorMessage, numPosts} = useFetch(url);
-  const [imageGroup, setImageGroup] = useState([]);
+  const [displayedImgs, setDisplayedImgs] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setQuery(userInput);
     setPage(1);
+    setShowNums(true);
   }
 
   /*** Showing "popular" query on window load ***/
   useEffect(() => {
     setQuery("colourful");
+    console.log(imageData);
   }, []);
 
   /*** Handle results pages ***/
   const nextPage = () =>{
+    let tempResults = resultNum;
     setPage(++page);
+    setResultNum({start: (tempResults.start + 25), end: (tempResults.end+25)});
+    console.log(resultNum);
   }
 
   const prevPage = () =>{
+    let tempResults = resultNum;
     if(page>=2){
       setPage(--page);
+      setResultNum({start: (tempResults.start - 25), end: (tempResults.end-25)});
     }
   }
 
-  /** Change like button text, adds/removes liked images to array
-  *** likedArray is the initial array with heart image src values
-  *** liked holds the heart image src values
-  *** likedImages holds the actual image src values ***/
+  useEffect(()=>{
+    setPage(1);
+    setResultNum({start:1, end:25});
+  },[query])
+ 
+  /*** Change like button text, adds/removes liked images to array ***/
   const red = 'red.png';
   const white = 'white.png';
-  const [likedImages, setLikedImages] = useState([]);
-  const likedArray = new Array(numPosts).fill(white);
-  const [liked, setLiked] = useState([]);
+  const [likedImages, setLikedImages] = useState([]); /*holds image src values */
+  const initialHearts = new Array(numPosts).fill(white); /*initial array with heart image src values*/
+  const [heartList, setHeartList] = useState([]); /*liked holds the heart image src values*/
 
   useEffect(()=>{
-    setLiked(likedArray);
-    setImageGroup(imageData.results);
+    setHeartList(initialHearts);
+    setDisplayedImgs(imageData.results);
+    
   },[numPosts, imageData, query])
- 
+
   useEffect(()=>{
       setLikedImages(likedImages);
-  }, [liked])
+  }, [heartList])
 
   const handleClick = (index) =>{
-    let newArray = [...liked];
-    if(newArray[index]===red){
-      newArray[index] = white;
+    let tempArray = [...heartList];
+    if(tempArray[index]===red){
+      tempArray[index] = white;
       setLikedImages(likedImages.filter(likedImages => likedImages.url !== 
-        imageGroup[index].urls.small))
+      displayedImgs[index].urls.small))
     }
     else{
-      newArray[index] = red;
+      tempArray[index] = red;
       setLikedImages(theArray => [...theArray, {
-        url: imageGroup[index].urls.small,
-        alt: imageGroup[index].alt_description
+        url: displayedImgs[index].urls.small,
+        alt: displayedImgs[index].alt_description
       }]);
     }
-    setLiked(newArray);
+    setHeartList(tempArray);
   }
 
   return (
@@ -119,12 +134,15 @@ function Home(props) {
       </div>
         
       <div className="Content">
+        {showNums && <p>Showing {resultNum.start} - {resultNum.end} out of {imageData.total} results for "{query}"</p>}
         <div className="grid" ref={gridRef}>
         {imageData && isLoaded && 
-          (imageGroup.map((image, i)=>(
+          (displayedImgs.map((image, i)=>(
           <div  key={i}>
               <img  className="images" src={image.urls.small} alt={image.alt_description} ></img>
-              <span><button className='likeButton' onClick={()=>handleClick(i)}> <img className="heart" alt="like button" src={liked[i]}></img> </button></span>
+              <span><button className='likeButton' onClick={()=>handleClick(i)}> 
+                <img className="heart" alt="like button" src={heartList[i]}></img></button>
+              </span>
           </div>
         )))}
         </div>

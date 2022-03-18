@@ -5,14 +5,11 @@ const Screenshot = async (element, imageFileName) => {
     allowTaint: true,
     useCORS: true
   });
-  const image = canvas.toDataURL("image/png", 1.0);
-  download(image);
-};
 
-const download = (image, { name = "img", extension = ".jpg" } = {}) => {
+  const image = canvas.toDataURL("image/png", 1.0);
   const a = document.createElement("a");
   a.href = image;
-  a.download = name + extension;
+  a.download = imageFileName + ".jpg";
   a.click();
 };
 
