@@ -1,0 +1,168 @@
+/* Home Page */
+
+.homeHeader{
+    background-color: rgb(248, 248, 248);
+    height: 100px;
+    padding-top: 50px;
+}
+.btn{
+    font-family: 'Avenir', sans-serif;
+    border-radius: 50px;
+    font-size: 18px;
+    border: none;
+    color:white;
+    padding: 12px 26px;
+    text-align: center;
+    background-color: #E8423F;
+    transition: 0.3s;
+    cursor: pointer;
+    display: inline-flex;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 10px;
+
+  }
+  
+.btn:hover {
+    text-decoration: none;
+      background-color: #FF94AB;
+}
+
+#create{
+    margin-right: 6.5%;
+    float: right;
+}
+
+#clear{
+    margin-right: 2%;
+    float: right;
+    display: none;
+}
+
+#nextPage{
+    margin-right: 2%;
+    margin-bottom: 2%;
+    float: right;
+}
+
+#back {
+    float: left;
+    margin-left: 6.5%;
+}
+
+.logo {
+    display: block;
+    width: 120px;
+    float:left;
+    margin-left:6.5%;
+    margin-top: -5px;
+    cursor: pointer;
+}
+
+.Search {
+    float:left;
+    margin-left:3%;
+}
+
+.searchInput{
+    padding: 10px 10px 10px 20px;
+    /*width: 400%;*/
+    width: 55vw;
+    height: 30px;
+    border-radius: 50px;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+    font-size: 18px;
+}
+
+.submit{
+    display: none;
+}
+
+/* Moodboard Page*/
+
+.moodHeader{
+    background-color: rgb(248, 248, 248);
+    height: 50px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+.colorPicker {
+    display: inline-flex;
+    align-items: center;
+    width: 140px;
+    padding: 6px 12px;
+    margin-left: 5%;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.colorBox {
+    padding: 0px;
+    border: transparent;
+    height: 34px;
+    cursor: pointer;
+}
+
+.hexCode {
+    border: none;
+    background: none;
+    font-size: 15px;
+    text-transform: uppercase;
+    width:70px;
+    margin-left: 10px;;
+    letter-spacing: 1px;
+}
+
+.moodForm{
+    display: grid;
+    width: 50%;
+    float: right;
+}
+
+.nameInput {
+    grid-column: 1;
+    border: 2px solid grey;
+    border-style: none none none none;
+    background-color: transparent;
+    width:200px;
+    font-family: 'Avenir', sans-serif;
+    font-size: 22px;
+    color: #353535;  
+    outline:none;
+    font-weight: bold;
+    letter-spacing: 0.5px;;
+}
+
+::placeholder {
+    font-size: 20px;
+    color: rgb(116, 116, 116);
+    font-weight: 100;
+  }
+  
+  .moodForm div {
+    grid-column: 2;
+    justify-self: end;
+    margin-right: 8%;
+  }
+
+.downloadBtn {
+    font-family: 'Avenir', sans-serif;
+    border-radius: 50px;
+    font-size: 18px;
+    border: none;
+    color:white;
+    padding: 12px 26px;
+    text-align: center;
+    background-color: #E8423F;
+    transition: 0.3s;
+    cursor: pointer;
+    width: 135px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 10px;
+
+}
+
+.downloadBtn:hover {
+    text-decoration: none;
+      background-color: #FF94AB;
+}

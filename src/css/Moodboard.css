@@ -1,9 +1,4 @@
-.moodHeader{
-    background-color: rgb(248, 248, 248);
-    height: 50px;
-    padding-top: 25px;
-    padding-bottom: 25px;
-}
+/* Sidebar */
 
 .sidebar {
     width: 15%;
@@ -15,50 +10,6 @@
 .sidebar img{
     max-width: 100%;
     position: relative;
-}
-
-.canvas{
-    width: 81%;
-    height: 80%;
-    margin-left:17%;
-    margin-top:2%;
-    border: none;
-    position: fixed;
-}
-
-.draggable{
-    position:absolute;
-    cursor: pointer;
-
-}
-
-.colorPicker {
-    display: inline-flex;
-    align-items: center;
-    width: 140px;
-    padding: 6px 12px;
-    margin-left: 5%;
-    border: none;
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px;
-    border-radius: 10px;
-    background-color: white;
-}
-
-.colorBox {
-    padding: 0px;
-    border: transparent;
-    height: 34px;
-    cursor: pointer;
-}
-
-.hexCode {
-    border: none;
-    background: none;
-    font-size: 15px;
-    text-transform: uppercase;
-    width:70px;
-    margin-left: 10px;;
-    letter-spacing: 1px;
 }
 
 .addButton {
@@ -86,6 +37,32 @@
     z-index: 1;
 }
 
+.empty {
+    font-size: 15px;
+    color: #6e6e6e;
+    margin-left: 10%;
+}
+
+/* Canvas */
+
+.canvas{
+    width: 81%;
+    height: 80%;
+    margin-left:17%;
+    margin-top:2%;
+    border: none;
+    position: fixed;
+}
+
+.draggable{
+    position:absolute;
+    cursor: pointer;
+}
+
+.moodImages {
+    width: 90%;
+}
+
 .hoverMenu {
     z-index: 2;
     transition: all 300ms ease-in-out;
@@ -110,6 +87,11 @@
     top: 15px;
     left: 15px;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+    transition: 0.5s;
+}
+
+.front:hover {
+    transform: scale(1.15);
 }
 
 .frontImage {
@@ -126,78 +108,13 @@
     top: 70px;
     left: 15px;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+    transition: 0.5s;
+}
+
+.remove:hover {
+    transform: scale(1.15);
 }
 
 .removeImage {
     width: 25px;
-}
-
-.resize {
-    opacity: .0;
-    transition: all 300ms ease-in-out;
-    background-color: white;
-    border: none;
-    border-radius: 50px;
-    padding: 8px 10px;
-    cursor: pointer;
-    position: absolute;
-    right: -15px;
-    top: 88%;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
-}
-
-.resizeImage {
-    width: 20px;
-}
-
-.moodForm{
-    display: grid;
-    width: 50%;
-    float: right;
-}
-
-.nameInput {
-    grid-column: 1;
-    border: 2px solid grey;
-    border-style: none none none none;
-    background-color: transparent;
-    width:200px;
-    font-family: 'Avenir', sans-serif;
-    font-size: 22px;
-    color: #353535;  
-    outline:none;
-    font-weight: bold;
-    letter-spacing: 0.5px;;
-}
-
-::placeholder {
-    font-size: 20px;
-    color: rgb(116, 116, 116);
-    font-weight: 100;
-  }
-  
-  .moodForm div {
-    grid-column: 2;
-    justify-self: end;
-    margin-right: 8%;
-  }
-
-.downloadBtn {
-    font-family: 'Avenir', sans-serif;
-    border-radius: 50px;
-    font-size: 18px;
-    border: none;
-    color:white;
-    padding: 12px 26px;
-    text-align: center;
-    background-color: #E8423F;
-    transition: 0.3s;
-    cursor: pointer;
-    width: 135px;
-}
-
-.empty {
-    font-size: 15px;
-    color: #6e6e6e;
-    margin-left: 10%;
 }

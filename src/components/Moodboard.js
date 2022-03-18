@@ -1,4 +1,6 @@
 import '../css/Moodboard.css';
+import '../css/Headers.css';
+
 import { useNavigate } from 'react-router-dom';
 import {useState, useEffect, useRef} from 'react';
 import Draggable from 'react-draggable';
