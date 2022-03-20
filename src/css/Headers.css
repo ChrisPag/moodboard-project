@@ -1,4 +1,7 @@
 /* Home Page */
+*{
+    font-family:'nunito sans';
+}
 
 .homeHeader{
     background-color: rgb(248, 248, 248);
@@ -6,7 +9,6 @@
     padding-top: 50px;
 }
 .btn{
-    font-family: 'Nunito';
     font-weight: 600;
     border-radius: 50px;
     font-size: 20px;
@@ -19,6 +21,10 @@
     cursor: pointer;
     display: inline-flex;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 10px;
+  }
+
+  button a{
+    font-family: 'nunito sans';
   }
   
 .btn:hover {
@@ -60,9 +66,11 @@
 .Search {
     float:left;
     margin-left:3%;
+    
 }
 
 .searchInput{
+    font-family:'nunito sans';
     padding: 10px 10px 10px 20px;
     /*width: 400%;*/
     width: 55vw;
@@ -70,7 +78,6 @@
     border-radius: 50px;
     border-style: none;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
-    font-family: 'nunito';
     font-size: 18px;
 }
 
@@ -148,7 +155,6 @@
   }
 
 .downloadBtn {
-    font-family: 'nunito';
     font-weight: 600;
     border-radius: 50px;
     font-size: 20px;

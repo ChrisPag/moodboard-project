@@ -1,5 +1,9 @@
 /* Sidebar */
 
+*{
+    font-family:'nunito';
+}
+
 .sidebar {
     width: 15%;
     overflow-y:scroll;

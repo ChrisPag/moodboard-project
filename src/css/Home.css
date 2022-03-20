@@ -1,4 +1,7 @@
 /*Home.css includes Home.js, Content.js, and Search.js*/
+*{
+    font-family:'nunito';
+}
 
 a {
     font-family: 'nunito';
