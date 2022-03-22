@@ -193,6 +193,8 @@
     .searchInput {width: 90%;}
     #create { font-size: 17px;  margin-top: 10px; position: relative; float: right}
     .homeHeader{ height: 120px;}
+    .modal {display: none}
+
 }
 
 @media all and (max-width: 450px) {
@@ -200,6 +202,7 @@
     .logo {width: 70px}
     #create { font-size: 17px; width: 55%; margin-top: 10px; position: relative; float: right; }
     .homeHeader{ height: 120px;}
+    .modal {display: none}
 }
 
 
