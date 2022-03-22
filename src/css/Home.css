@@ -69,23 +69,11 @@ a {
     color: grey;
 }
 
-@media only screen and (max-width: 1500px) {
-    .searchInput {width: 300%;}
-    .logo {width: 100px}
-}
-
-@media only screen and (max-width: 1300px) {
-    .searchInput {width: 200%;}
-}
-
-@media only screen and (max-width: 1000px) {
-    .searchInput {width: 130%;}
-}
-
-@media only screen and (max-width: 800px) {
-    .searchInput {width: 100%;}
-}
-
-@media all and (max-width: 700px) {
-   
+@media all and (max-width: 450px) {
+    .grid div span {
+        position: absolute;
+        bottom: 70px;
+        right: 130px;
+        z-index: 1; 
+    }
 }
