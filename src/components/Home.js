@@ -52,7 +52,7 @@ function Home(props) {
     setShowNums(true);
   }
 
-  /*** Showing "popular" query on window load ***/
+  /*** Showing "colourful" query on window load ***/
   useEffect(() => {
     setQuery("colourful");
   }, []);
@@ -139,7 +139,7 @@ function Home(props) {
         <div className="grid" ref={gridRef}>
         {imageData && isLoaded && 
           (displayedImgs.map((image, i)=>(
-          <div  key={i}>
+          <div key={i}>
               <img  className="images" src={image.urls.small} alt={image.alt_description} ></img>
               <span><button className='likeButton' onClick={()=>handleClick(i)}> 
                 <img className="heart" alt="like button" src={heartList[i]}></img></button>

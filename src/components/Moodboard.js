@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import {useState, useEffect, useRef} from 'react';
 import Draggable from 'react-draggable';
 import ColorPicker from './ColorPicker';
-import React from 'react';
 import screenshot from './Screenshot';
 
 function Moodboard(props) {
@@ -25,7 +24,6 @@ function Moodboard(props) {
   
   useEffect(()=>{
     setMoodboardName(nameInput);
-    
   },[nameInput]);
 
   /* Changing the background color value */
@@ -55,6 +53,7 @@ function Moodboard(props) {
   }
 
   /*** Move to front button ***/
+  //ps this sucks
   const zIndexList = new Array(canvasPhotos.length).fill(0);
   const [zIndexProp, setzIndex] = useState([]);
   const moveToFront = (index) =>{
@@ -79,6 +78,7 @@ function Moodboard(props) {
       <div className="moodHeader"> 
         <button id="back" className="btn" onClick={()=> navigate(-1)}>Back</button>
         <ColorPicker value={state} onChange={handleInput} title="Change Background Color"/>
+       
         <form onSubmit={handleName} className="moodForm">
           <input type ="text"
             placeholder="Moodboard Name"
@@ -90,8 +90,8 @@ function Moodboard(props) {
             <button id="download" className="downloadBtn" >Download</button>
           </div>
         </form>
-        
       </div>
+
       <div className='main'>
         <div className='sidebar'>
           {props.likes && 

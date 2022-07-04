@@ -174,3 +174,22 @@
     text-decoration: none;
       background-color: #FF94AB;
 }
+
+/*When width is less than 800px apply these styles*/
+@media screen and (max-width:800px){
+    .colorPicker {
+        margin-left: 25%;
+    }
+
+    form{
+        position:absolute;
+        left: 0; 
+        right: 0; 
+        margin-left: auto; 
+        margin-right: auto; 
+        width: 100px;
+        margin-top:15px;
+    }
+
+    
+}
