@@ -176,19 +176,31 @@
 }
 
 /*When width is less than 800px apply these styles*/
-@media screen and (max-width:800px){
+@media screen and (max-width:700px){
     .colorPicker {
-        margin-left: 25%;
+        /*margin-left: 21%;*/
+        float:right;
+        margin-right:15px;
     }
     
-    form{
+    .nameInput{
         position:absolute;
-        left: 0; 
-        right: 0; 
+        right: 10px; 
         margin-left: auto; 
         margin-right: auto; 
-        width: 100px;
+        width: 200px;
         margin-top:15px;
+        text-align: center;
+    }
+
+    #download{
+        position:absolute;
+         
+        right: 10px; 
+        margin-left: auto; 
+        margin-right: auto; 
+        width: 150px;
+        margin-top:50px;
     }
 }
 
