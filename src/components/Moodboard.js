@@ -53,16 +53,17 @@ function Moodboard(props) {
   }
 
   /*** Move to front button ***/
-  //ps this sucks
+  //if tempArray[index] is not the highest, make it the highest
+  
   const zIndexList = new Array(canvasPhotos.length).fill(0);
   const [zIndexProp, setzIndex] = useState([]);
   const moveToFront = (index) =>{
     let tempArray = [...zIndexList]; //set the temp array to original array (all 0)
     if(tempArray[index]===1){
-      tempArray[index] = 0;
+      tempArray[index] = tempArray[index]-1;
     }
     else{
-      tempArray[index] = 1;
+      tempArray[index] = tempArray[index]+1;
     }
     setzIndex(tempArray); //change the zIndex of the given image only
   } 

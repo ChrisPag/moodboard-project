@@ -202,6 +202,10 @@
         width: 150px;
         margin-top:50px;
     }
+
+    .moodHeader{
+        background-color: white;
+    }
 }
 
 @media only screen and (max-width: 1500px) {
