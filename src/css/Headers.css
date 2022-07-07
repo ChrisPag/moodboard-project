@@ -175,10 +175,9 @@
       background-color: #FF94AB;
 }
 
-/*When width is less than 800px apply these styles*/
+/*When width is less than 700px apply these styles*/
 @media screen and (max-width:700px){
     .colorPicker {
-        /*margin-left: 21%;*/
         float:right;
         margin-right:15px;
     }
@@ -195,7 +194,6 @@
 
     #download{
         position:absolute;
-         
         right: 10px; 
         margin-left: auto; 
         margin-right: auto; 
@@ -236,5 +234,3 @@
     .homeHeader{ height: 120px;}
     .modal {display: none}
 }
-
-
