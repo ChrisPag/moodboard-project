@@ -13,8 +13,8 @@ a {
 .Content{
     width: 90%;
     height: auto;
-    overflow: hidden;
     margin: 0 auto;
+    overflow: visible;
 }
 
 .grid {
@@ -30,7 +30,6 @@ a {
     position: absolute;
     bottom: 75px;
     right: 70px;
-    z-index: 1;
 }
 .likeButton{
     position: absolute;
@@ -54,6 +53,20 @@ a {
     transform: scale(1.15);
 }
 
+
+.cartHeart {
+    width: 45px;
+    position: absolute;
+    bottom: 15px;
+    left: 0px;
+    cursor: pointer;  
+    transition: 0.5s;
+}
+
+.cartHeart:hover {
+    transform: scale(1.15);
+}
+
 #results {
     margin-left: 1.5%;
 }
@@ -69,12 +82,124 @@ a {
     color: grey;
 }
 
+.cartCounter{
+    background-color: #E8423F;
+    position: fixed;
+    top: 30px;
+    right: 120px; 
+    width: 25px;
+    height: 25px;
+    z-index: 2;
+    border-radius: 25px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.cartCounter p {
+    margin: 0px;
+    color: white;
+    padding-top: 2px;
+}
+
+.cartButton{
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px;
+    border-radius: 100px;
+    width: 90px;
+    height: 90px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    overflow: visible;
+    position: fixed;
+    top: 30px;
+    right: 120px; 
+    background-color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    z-index: 1;
+}
+
+.cartIcon{
+    width: 50px; 
+}
+
+.popup{
+    visibility:hidden;
+    opacity: 0;
+    transition: 0.1s;
+    transition-delay:1s;
+    z-index: 1;
+    position: fixed;
+    width:290px;
+    height: 590px;
+    background-color: white;
+    position: fixed;
+    top: 135px;
+    right: 20px;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 10px;
+}
+
+.popupBox{
+    position: fixed;
+    width:250px;
+    height: 500px;
+    overflow-y: scroll;
+    z-index: 2!important;
+    margin-left:20px;
+    margin-top: 20px;
+}
+
+.popup div{
+    
+}
+
+.popupImage{
+    width:225px;
+}
+
+.createBtn{
+    position: fixed;
+    top: 665px;
+    right:80px;
+    font-weight: 600;
+    border-radius: 50px;
+    font-size: 16px;
+    border: none;
+    color:white;
+    padding: 10px 20px;
+    text-align: center;
+    background-color: #E8423F;
+    transition: 0.3s;
+    cursor: pointer;
+    display: inline-flex;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 10px;
+}
+
+.cartButton:hover{
+    transform: scale(1.05);
+    transition: 0.3s;
+    z-index: 1;
+}
+
+.cartButton:hover + .popup {
+    visibility: visible;
+    opacity:1;
+    transition:0.1s;
+    z-index: 1;
+}
+
+.popup:hover {
+    visibility: visible;
+    opacity:1;
+    z-index: 1;
+}
+
 @media all and (max-width: 450px) {
     .grid div span {
         position: absolute;
         bottom: 70px;
         right: 130px;
-        z-index: 1; 
     }
 }
 

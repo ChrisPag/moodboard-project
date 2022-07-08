@@ -83,6 +83,11 @@ function Home(props) {
   const [likedImages, setLikedImages] = useState([]); /*holds image src values */
   const initialHearts = new Array(numPosts).fill(white); /*initial array with heart image src values*/
   const [heartList, setHeartList] = useState([]); /*liked holds the heart image src values*/
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    setCount(likedImages.length)
+  });
 
   useEffect(()=>{
     setHeartList(initialHearts);
@@ -94,7 +99,7 @@ function Home(props) {
   }, [heartList])
 
   const handleClick = (index) =>{
-    let tempArray = [...heartList];
+    let tempArray = [...heartList] ;
     if(tempArray[index]===red){
       tempArray[index] = white;
       setLikedImages(likedImages.filter(likedImages => likedImages.url !== 
@@ -109,6 +114,12 @@ function Home(props) {
     }
     setHeartList(tempArray);
   }
+
+  const handleClick2 = (index) =>{
+    
+  }
+
+  console.log(heartList);
 
   return (
     <div className="Home">
@@ -125,12 +136,37 @@ function Home(props) {
               <button className="submit" type="submit">Go</button>
           </form>
         </div>
-        <button  id="create" className="btn" onClick = {()=> props.updateLikes(likedImages)}>
-          <Link to="/moodboard">Create Moodboard</Link>
-        </button>
       </div>
         
       <div className="Content">
+
+        <div className="cart" >
+          <div className="cartCounter"><p>{count}</p></div>
+            <div className="cartButton">
+              <img src="cart.png" className="cartIcon"/>
+              
+            </div>
+              
+            <div className="popup" >
+              <div className="popupBox" >
+                  {likedImages && 
+                  (likedImages.map((likedImages, i)=>(
+                  <div  key={i}>
+                      <img className="popupImage" src={likedImages.url} alt={likedImages.alt} index={i} />
+                      <span><button className='likeButton' onClick={()=>handleClick(i)}> 
+                      <img className="cartHeart" alt="like button" src={heartList[i]}></img></button>
+                      </span>  
+                  </div>
+                  )))}
+                </div>
+                <div className='createSection'>
+                  <button  id="create" className="createBtn" onClick = {()=> props.updateLikes(likedImages)}>
+                     <Link to="/moodboard">Create Moodboard</Link>
+                  </button>
+                </div>
+            </div>
+          </div> 
+
         {showNums && 
         <div id="results">
           <h1>{query}</h1>
@@ -147,6 +183,8 @@ function Home(props) {
           </div>
         )))}
         </div>
+
+        
 
         {!isLoaded && !errorMessage && <p>Loading...</p>}
         {errorMessage && <p> {errorMessage}</p>}
