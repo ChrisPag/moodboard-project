@@ -56,14 +56,14 @@
     border: none;
     position: fixed;
 }
-
+    
 .draggable{
     position:absolute;
     cursor: pointer;
 }
 
-.moodImages {
-    width: 90%;
+.moodImages{
+    width:360px;
 }
 
 .hoverMenu {
@@ -126,7 +126,7 @@
     .canvas{
         margin-top:85px;
         margin-left:110px;
-        width:110%;
+        width:70%;
     }
 
     .addButton{
@@ -141,6 +141,32 @@
     }
 
     .moodImages{
-        width:50%;
+        width:100px
     }
+    
+    .hoverMenu {
+        opacity: 1;
+    }
+
+    .frontImage {
+        width:15px;
+    } 
+
+    .front {
+        padding: 3px 5px 1px;
+        top: 5px;
+        left: 5px;
+    }   
+
+    .removeImage {
+        width:15px;
+    }
+
+    .remove{
+        padding: 3px 5px 1px;
+        top: 35px;
+        left: 5px;
+    }
+
+    
 }

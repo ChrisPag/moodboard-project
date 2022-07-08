@@ -51,7 +51,17 @@
 
 #back {
     float: left;
-    margin-left: 6.5%;
+    margin-left: 4%;
+    margin-top: 5px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.backArrow:hover {
+transform: scale(1.1);
+transition: 0.5s;
 }
 
 .logo {
@@ -204,6 +214,16 @@
     .moodHeader{
         background-color: white;
     }
+
+    .hexCode {
+        display: none;
+
+    }
+    .colorPicker {
+        width: 60px;
+        float:left;
+    }
+
 }
 
 @media only screen and (max-width: 1500px) {

@@ -77,7 +77,7 @@ function Moodboard(props) {
   return (
     <div className="Moodboard">
       <div className="moodHeader"> 
-        <button id="back" className="btn" onClick={()=> navigate(-1)}>Back</button>
+        <button id="back"  onClick={()=> navigate(-1)}><img src="back.png" width="20px" class="backArrow"/></button>
         <ColorPicker value={state} onChange={handleInput} title="Change Background Color"/>
        
         <form onSubmit={handleName} className="moodForm">
@@ -110,13 +110,13 @@ function Moodboard(props) {
           <p className="empty">There are no liked images yet.</p>}
         </div> 
         
-        <div ref={canvasRef} className= "canvas" id="canvasColor" style={{backgroundColor: state}}>
+        <div ref={canvasRef} className="canvas" id="canvasColor" style={{backgroundColor: state}}>
           {/* The canvas is where liked images (beside the sidebar) can be added to*/}
             {canvasPhotos.map((photo, j)=>{
             return (
             
-            <Draggable bounds="parent" key={j}>
-              <div  className="draggable"  style={{zIndex: zIndexProp[j]}}>
+            <Draggable bounds= "parent" key={j} >
+              <div  id="test" className="draggable"  style={{zIndex: zIndexProp[j]}} >
                 <div className='hoverMenu'>
                   <button className="front" title="Bring to Front" type='button' onClick={() =>moveToFront(j)}>
                     <img className="frontImage" src="front.png" alt="move to front"></img>
