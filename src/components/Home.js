@@ -39,11 +39,15 @@ function Home(props) {
 
   /*** Fetch the data using the user's query ***/
   const url =
-  `https://api.unsplash.com/search/photos/?page=${page}&per_page=25&query=${query} &client_id=${
-  process.env.REACT_APP_ACCESS_KEY}`
+  `https://api.unsplash.com/search/photos/?page=${page}&per_page=25&query=${query} &client_id=${process.env.REACT_APP_ACCESS_KEY}`
 
   const {data: imageData, isLoaded, errorMessage, numPosts} = useFetch(url);
   const [displayedImgs, setDisplayedImgs] = useState([]);
+
+  /*** Showing "colourful" query on window load ***/
+  useEffect(() => {
+    setQuery("colourful");
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -52,12 +56,7 @@ function Home(props) {
     setShowNums(true);
   }
 
-  /*** Showing "colourful" query on window load ***/
-  useEffect(() => {
-    setQuery("colourful");
-  }, []);
-
-  /*** Handle results pages ***/
+  /*** Handle results pages, update number of results ***/
   const nextPage = () =>{
     let tempResults = resultNum;
     setPage(++page);
@@ -77,54 +76,56 @@ function Home(props) {
     setResultNum({start:1, end:25});
   },[query])
  
-  /*** Change like button text, adds/removes liked images to array ***/
+  /*** Change like button src, update likedImages ***/
   const red = 'red2.png';
   const white = 'white2.png';
-  const [likedImages, setLikedImages] = useState([]); /*holds image src values */
-  const initialHearts = new Array(numPosts).fill(white); /*initial array with heart image src values*/
-  const [heartList, setHeartList] = useState([]); /*liked holds the heart image src values*/
+  const [likedImages, setLikedImages] = useState([]); //holds image url, alt, and heart
   const [count, setCount] = useState(0);
 
-  useEffect(() => {
-    setCount(likedImages.length)
-  });
-
   useEffect(()=>{
-    setHeartList(initialHearts);
     setDisplayedImgs(imageData.results);
+    
+    if (imageData.results){
+      for(const element of imageData.results){ //add heart property to each result
+        element.heart = 'white2.png';
+      }
+    }
   },[numPosts, imageData, query])
 
   useEffect(()=>{
-      setLikedImages(likedImages);
-  }, [heartList])
+    setDisplayedImgs(displayedImgs);
+    setCount(likedImages.length);
+  }, [displayedImgs, likedImages])
 
   const handleClick = (index) =>{
-    let tempArray = [...heartList] ;
-    if(tempArray[index]===red){
-      tempArray[index] = white;
-      setLikedImages(likedImages.filter(likedImages => likedImages.url !== 
-      displayedImgs[index].urls.small))
+    let tempArray = [...displayedImgs];
+    if(tempArray[index].heart === red){
+      tempArray[index].heart = white;
+      setLikedImages(likedImages.filter(likedImages => likedImages.url !== displayedImgs[index].urls.small));
     }
+
     else{
-      tempArray[index] = red;
+      tempArray[index].heart = red;
       setLikedImages(theArray => [...theArray, {
         url: displayedImgs[index].urls.small,
         alt: displayedImgs[index].alt_description
       }]);
     }
-    setHeartList(tempArray);
+    setDisplayedImgs(tempArray);
   }
 
-  const handleClick2 = (index) =>{
-    
+  const handleDelete = (url) =>{
+    setLikedImages(likedImages.filter(likedImages => url !== likedImages.url))
+    const index = displayedImgs.findIndex(element => element.urls.small === url);
+    let tempArray = [...displayedImgs];
+    tempArray[index].heart = white;
+    setDisplayedImgs(tempArray);
   }
-
-  console.log(heartList);
 
   return (
     <div className="Home">
       <div className="homeHeader">
-        <img className="logo" src="logo.png" onClick={refreshPage}></img>
+        <img className="logo" src="logo.png" alt="moodscape logo" onClick={refreshPage}></img>
         <div className="Search">
           <form onSubmit = {handleSubmit}>
               <input type ="text"
@@ -143,7 +144,7 @@ function Home(props) {
         <div className="cart" >
           <div className="cartCounter"><p>{count}</p></div>
             <div className="cartButton">
-              <img src="cart.png" className="cartIcon"/>
+              <img src="cart.png" className="cartIcon" alt="cart icon"/>
               
             </div>
               
@@ -151,11 +152,9 @@ function Home(props) {
               <div className="popupBox" >
                   {likedImages && 
                   (likedImages.map((likedImages, i)=>(
-                  <div  key={i}>
-                      <img className="popupImage" src={likedImages.url} alt={likedImages.alt} index={i} />
-                      <span><button className='likeButton' onClick={()=>handleClick(i)}> 
-                      <img className="cartHeart" alt="like button" src={heartList[i]}></img></button>
-                      </span>  
+                  <div key={i}>
+                      <img className="popupImage" src={likedImages.url} alt={likedImages.alt} />
+                      <button onClick={()=>handleDelete(likedImages.url)}>Delete</button>
                   </div>
                   )))}
                 </div>
@@ -177,18 +176,15 @@ function Home(props) {
           (displayedImgs.map((image, i)=>(
           <div key={i}>
               <img  className="images" src={image.urls.small} alt={image.alt_description} ></img>
-              <span><button className='likeButton' onClick={()=>handleClick(i)}> 
-                <img className="heart" alt="like button" src={heartList[i]}></img></button>
+              <span><button className='likeButton' onClick={()=>handleClick(i)}>
+                <img className="heart" alt="like button" src={image.heart}></img></button>
               </span>
           </div>
         )))}
         </div>
 
-        
-
         {!isLoaded && !errorMessage && <p>Loading...</p>}
         {errorMessage && <p> {errorMessage}</p>}
-
         {query && <button onClick = {nextPage} id="nextPage" className="btn">Next</button>}
         {query && page>=2 &&
          <button onClick = {prevPage} id="prevPage" className="btn">Previous</button>}
