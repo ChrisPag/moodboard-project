@@ -10,8 +10,7 @@ import screenshot from './Screenshot';
 function Moodboard(props) {
   const navigate = useNavigate();
   const canvasRef = useRef();
-  const [imageList, setImageList] = useState(props.likes);
-
+  
   /*** User inputs filename ***/
   const [moodboardName, setMoodboardName] = useState();
   const [nameInput, setNameInput] = useState("");
@@ -35,49 +34,54 @@ function Moodboard(props) {
   /*** Add to canvas ***/
   const [canvasPhotos, setCanvasPhotos] = useState([]);
   const addToCanvas = (index) =>{
+    const canvasIndex = canvasPhotos.length;
     const movedPhotos = props.likes.filter((photo)=> props.likes.url === photo.index);
     setCanvasPhotos((canvasPhotos)=> [...canvasPhotos, 
       { url: movedPhotos[index].url,
         alt: movedPhotos[index].alt,
+        id: canvasIndex,
+        zIndex: canvasIndex +1
       }]);
   } 
 
   /*** Remove from canvas ***/
-  const removeFromCanvas = (index) =>{
-    let tempArray = canvasPhotos.filter(canvasPhotos=> imageList[index].url !==
-       canvasPhotos.url
-    );
-    
+  const removeFromCanvas = (id) =>{
+    let tempArray = canvasPhotos.filter(element=> element.id !== id);
     setCanvasPhotos(tempArray);
-    console.log(canvasPhotos[index]);
   }
 
   /*** Move to front button ***/
-  //if tempArray[index] is not the highest, make it the highest
-  
-  const zIndexList = new Array(canvasPhotos.length).fill(0);
-  const [zIndexProp, setzIndex] = useState([]);
   const moveToFront = (index) =>{
-    let tempArray = [...zIndexList]; //set the temp array to original array (all 0)
-    if(tempArray[index]===1){
-      tempArray[index] = tempArray[index]-1;
+    let tempArray = [...canvasPhotos]; 
+    
+    //map canvasPhotos zIndexes to get max value
+    const zIndexes = canvasPhotos.map(photos =>{
+      return photos.zIndex;
+    })
+    if(tempArray[index].zIndex < Math.max(...zIndexes)){
+      //make the clicked image's zindex max, make the rest lower by 1
+      tempArray[index].zIndex = Math.max(...zIndexes) + 1;
+      for(const element of tempArray){ 
+        element.zIndex = element.zIndex - 1;
+      }
     }
-    else{
-      tempArray[index] = tempArray[index]+1;
-    }
-    setzIndex(tempArray); //change the zIndex of the given image only
+    setCanvasPhotos(tempArray);
   } 
 
   /*** Update when new photo is added ***/
   useEffect(()=>{
-    setImageList(canvasPhotos);
-    setzIndex(zIndexList);
+    setCanvasPhotos(canvasPhotos);
+    console.log(canvasPhotos);
   },[canvasPhotos]);
+
+  useEffect(()=>{
+    setCanvasPhotos(canvasPhotos);
+  });
 
   return (
     <div className="Moodboard">
       <div className="moodHeader"> 
-        <button id="back"  onClick={()=> navigate(-1)}><img src="back.png" width="20px" class="backArrow"/></button>
+        <button id="back"  onClick={()=> navigate(-1)}><img src="back.png" alt="back" width="20px" class="backArrow"/></button>
         <ColorPicker value={state} onChange={handleInput} title="Change Background Color"/>
        
         <form onSubmit={handleName} className="moodForm">
@@ -116,12 +120,12 @@ function Moodboard(props) {
             return (
             
             <Draggable bounds= "parent" key={j} >
-              <div  id="test" className="draggable"  style={{zIndex: zIndexProp[j]}} >
+              <div  id="test" className="draggable" style={{zIndex: photo.zIndex}} >
                 <div className='hoverMenu'>
                   <button className="front" title="Bring to Front" type='button' onClick={() =>moveToFront(j)}>
                     <img className="frontImage" src="front.png" alt="move to front"></img>
                   </button>
-                  <button className="remove" title="Remove" type='button' onClick={() =>removeFromCanvas(j)}>
+                  <button className="remove" title="Remove" type='button' onClick={() =>removeFromCanvas(photo.id)}>
                     <img className="removeImage" src="trash.png" alt="trash bin"></img>
                   </button>
                 </div>

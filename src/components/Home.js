@@ -84,12 +84,12 @@ function Home(props) {
 
   useEffect(()=>{
     setDisplayedImgs(imageData.results);
-    
     if (imageData.results){
       for(const element of imageData.results){ //add heart property to each result
         element.heart = 'white2.png';
       }
     }
+    
   },[numPosts, imageData, query])
 
   useEffect(()=>{
