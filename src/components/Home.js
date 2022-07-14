@@ -12,7 +12,7 @@ import IntroModal from './IntroModal';
 
 function Home(props) {
   let [page, setPage] = useState(1);
-  let [resultNum, setResultNum] = useState({start: 1, end: 25});
+  let [resultNum, setResultNum] = useState();
   const [userInput, setUserInput] = useState("");
   const [query, setQuery] = useState("");
   const [showNums, setShowNums] = useState(false);
@@ -54,6 +54,7 @@ function Home(props) {
     setQuery(userInput.toUpperCase());
     setPage(1);
     setShowNums(true);
+    
   }
 
   /*** Handle results pages, update number of results ***/
@@ -72,10 +73,17 @@ function Home(props) {
   }
 
   useEffect(()=>{
-    setPage(1);
-    setResultNum({start:1, end:25});
-  },[query])
- 
+    if(page ===1){
+      if(imageData.total > 25){
+        setResultNum({start:1, end:25});
+      }
+      else{
+        setResultNum({start:1, end: imageData.total});
+      }
+    }
+  },[isLoaded])
+
+  
   /*** Change like button src, update likedImages ***/
   const red = 'red2.png';
   const white = 'white2.png';
@@ -140,12 +148,10 @@ function Home(props) {
       </div>
         
       <div className="Content">
-
         <div className="cart" >
           <div className="cartCounter"><p>{count}</p></div>
             <div className="cartButton">
               <img src="cart.png" className="cartIcon" alt="cart icon"/>
-              
             </div>
               
             <div className="popup" >

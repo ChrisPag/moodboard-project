@@ -71,12 +71,7 @@ function Moodboard(props) {
   /*** Update when new photo is added ***/
   useEffect(()=>{
     setCanvasPhotos(canvasPhotos);
-    console.log(canvasPhotos);
   },[canvasPhotos]);
-
-  useEffect(()=>{
-    setCanvasPhotos(canvasPhotos);
-  });
 
   return (
     <div className="Moodboard">
