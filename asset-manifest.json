@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/moodscape/static/css/main.c175b0b9.css",
+    "main.js": "/moodscape/static/js/main.f7f14cdd.js",
+    "static/js/787.5730e2c2.chunk.js": "/moodscape/static/js/787.5730e2c2.chunk.js",
+    "index.html": "/moodscape/index.html",
+    "main.c175b0b9.css.map": "/moodscape/static/css/main.c175b0b9.css.map",
+    "main.f7f14cdd.js.map": "/moodscape/static/js/main.f7f14cdd.js.map",
+    "787.5730e2c2.chunk.js.map": "/moodscape/static/js/787.5730e2c2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c175b0b9.css",
+    "static/js/main.f7f14cdd.js"
+  ]
+}
