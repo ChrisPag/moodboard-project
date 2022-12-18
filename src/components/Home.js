@@ -39,7 +39,7 @@ function Home(props) {
 
   /*** Fetch the data using the user's query ***/
   const url =
-  `https://api.unsplash.com/search/photos/?page=${page}&per_page=25&query=${query} &client_id=${process.env.REACT_APP_ACCESS_KEY}`
+  `https://api.unsplash.com/search/photos/?page=${page}&per_page=25&query=${query}&client_id=${process.env.REACT_APP_ACCESS_KEY}`
 
   const {data: imageData, isLoaded, errorMessage, numPosts} = useFetch(url);
   const [displayedImgs, setDisplayedImgs] = useState([]);
@@ -54,7 +54,6 @@ function Home(props) {
     setQuery(userInput.toUpperCase());
     setPage(1);
     setShowNums(true);
-    
   }
 
   /*** Handle results pages, update number of results ***/

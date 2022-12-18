@@ -34,6 +34,7 @@ function Moodboard(props) {
   /*** Add to canvas ***/
   const [canvasPhotos, setCanvasPhotos] = useState([]);
   const addToCanvas = (index) =>{
+    //using canvasIndex for id is problematic
     const canvasIndex = canvasPhotos.length;
     const movedPhotos = props.likes.filter((photo)=> props.likes.url === photo.index);
     setCanvasPhotos((canvasPhotos)=> [...canvasPhotos, 
@@ -71,6 +72,7 @@ function Moodboard(props) {
   /*** Update when new photo is added ***/
   useEffect(()=>{
     setCanvasPhotos(canvasPhotos);
+    console.log(canvasPhotos);
   },[canvasPhotos]);
 
   return (
