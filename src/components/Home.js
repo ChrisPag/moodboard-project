@@ -121,13 +121,13 @@ function Home(props) {
     setDisplayedImgs(tempArray);
   }
 
-  const handleDelete = (url) =>{
+  /*const handleDelete = (url) =>{
     setLikedImages(likedImages.filter(likedImages => url !== likedImages.url))
     const index = displayedImgs.findIndex(element => element.urls.small === url);
     let tempArray = [...displayedImgs];
     tempArray[index].heart = white;
     setDisplayedImgs(tempArray);
-  }
+  }*/
 
   return (
     <div className="Home">
@@ -159,7 +159,8 @@ function Home(props) {
                   (likedImages.map((likedImages, i)=>(
                   <div key={i}>
                       <img className="popupImage" src={likedImages.url} alt={likedImages.alt} />
-                      <button onClick={()=>handleDelete(likedImages.url)}>Delete</button>
+                      
+                      {/*<img src="trash.png" className="trash" alt="trash can" onClick={()=>handleDelete(likedImages.url)}></img>*/}
                   </div>
                   )))}
                 </div>

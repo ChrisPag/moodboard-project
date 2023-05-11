@@ -189,6 +189,19 @@ a {
     z-index: 1;
 }
 
+.trash{
+    position:absolute;
+    width:50px;
+    transition:0.1s;
+    right:35px;
+    top:10px;
+}
+
+.trash:hover{
+    transform: scale(1.05);
+    cursor:pointer;
+}
+
 .popup:hover {
     visibility: visible;
     opacity:1;
