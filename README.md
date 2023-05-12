@@ -1,6 +1,11 @@
 # Moodscape
-## About
 Moodscape is an app that allows users to easily create moodboards, or, in other words, collages that are used to convey a certain feeling or aesthetic. Users can search for images (powered by the Unsplash API), and can add their liked images to a canvas. Images on the canvas can be dragged around, deleted, and layered as needed. Additionally, the canvas background colour can be changed. The user can then download their creation to their own device.
+
+## Contributors
+* @ChrisPag - Christina Bose Paguirigan
+* @carmenskoretz - Carmen Skoretz
+
+![sample moodboard](public/moodboard.png)
 
 ## Technologies
 * ReactJS
